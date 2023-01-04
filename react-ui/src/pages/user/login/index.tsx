@@ -41,7 +41,7 @@ const Login: React.FC = () => {
 
   const fetchUserInfo = async () => {
     const userInfo = await initialState?.fetchUserInfo?.();
-    if (userInfo) {      
+    if (userInfo) {
       await setInitialState((s) => ({
         ...s,
         currentUser: userInfo,
@@ -71,9 +71,9 @@ const Login: React.FC = () => {
 
         await fetchUserInfo();
         /** 此方法会跳转到 redirect 参数所在的位置 */
-        if (!history) 
+        if (!history)
           return;
-        
+
         const { query } = history.location;
         const { redirect } = query as { redirect: string };
         history.push(redirect || '/');
@@ -92,7 +92,7 @@ const Login: React.FC = () => {
         id: 'pages.login.failure',
         defaultMessage: '登录失败，请重试！',
       });
-      message.error(defaultLoginFailureMessage);      
+      message.error(defaultLoginFailureMessage);
       getCaptchaCode();
     }
   };
@@ -259,7 +259,7 @@ const Login: React.FC = () => {
                     message: (
                       <FormattedMessage
                         id="pages.login.phoneNumber.required"
-                        defaultMessage="请输入手机号！"
+                        defaultMessage="请输入手机号"
                       />
                     ),
                   },
@@ -305,7 +305,7 @@ const Login: React.FC = () => {
                     message: (
                       <FormattedMessage
                         id="pages.login.captcha.required"
-                        defaultMessage="请输入验证码！"
+                        defaultMessage="请输入验证码"
                       />
                     ),
                   },
