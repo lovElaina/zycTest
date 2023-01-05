@@ -9,8 +9,9 @@ const Settings: LayoutSettings & {
   navTheme: 'light',
   headerTheme: 'light',
   primaryColor: '#722ED1',
+  //primaryColor: '#1890FF',
   layout: 'mix',
-  splitMenus: true,
+  splitMenus: false,
   contentWidth: 'Fluid',
   fixedHeader: true,
   fixSiderbar: true,
@@ -18,11 +19,11 @@ const Settings: LayoutSettings & {
   menu: {
     locale: false,
   },
-  title: 'Ant Design Pro',
+  title: '高校实习管理系统',
   pwa: false,
   logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
   iconfontUrl: '',
-  tabsLayout: false,
+  tabsLayout: true,
   apiBasePath: '/api',
 
 };

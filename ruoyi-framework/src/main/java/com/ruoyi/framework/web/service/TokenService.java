@@ -44,7 +44,7 @@ public class TokenService
     protected static final long MILLIS_SECOND = 1000;
 
     protected static final long MILLIS_MINUTE = 60 * MILLIS_SECOND;
-
+    //20分钟
     private static final Long MILLIS_MINUTE_TEN = 20 * 60 * 1000L;
 
     @Autowired
@@ -66,6 +66,7 @@ public class TokenService
                 Claims claims = parseToken(token);
                 // 解析对应的权限以及用户信息
                 String uuid = (String) claims.get(Constants.LOGIN_USER_KEY);
+                //加上前缀login_user_key
                 String userKey = getTokenKey(uuid);
                 LoginUser user = redisCache.getCacheObject(userKey);
                 return user;
