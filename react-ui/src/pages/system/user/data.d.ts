@@ -3,12 +3,14 @@
  *
  * @author whiteshader@163.com
  * @datetime  2021/09/16
- * 
+ *
  * */
 
 export type UserType = {
   userId: number;
   deptId: number;
+  // deptName: string;
+  // dept: any;
   userName: string;
   nickName: string;
   userType: string;
@@ -26,7 +28,7 @@ export type UserType = {
   updateBy: string;
   updateTime: Date;
   remark: string;
-  admin: boolean; 
+  admin: boolean;
   params: any;
   postIds: any;
   roleId: number

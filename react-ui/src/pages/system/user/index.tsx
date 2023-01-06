@@ -199,13 +199,14 @@ const UserTableList: React.FC = () => {
     },
     {
       title: <FormattedMessage id="system.User.dept_id" defaultMessage="班级" />,
-      dataIndex: 'dept.deptName',
+      dataIndex: ['dept','deptName'],
       valueType: 'text',
     },
     {
       title: <FormattedMessage id="system.User.nick_name" defaultMessage="姓名" />,
       dataIndex: 'nickName',
       valueType: 'text',
+      width: '120px',
       hideInSearch: true,
     },
     {
@@ -224,7 +225,7 @@ const UserTableList: React.FC = () => {
       valueType: 'text',
     },
     {
-      title: <FormattedMessage id="system.User.status" defaultMessage="帐号状态" />,
+      title: <FormattedMessage id="system.User.status" defaultMessage="账号状态" />,
       dataIndex: 'status',
       valueType: 'select',
       valueEnum: statusOptions,

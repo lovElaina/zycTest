@@ -89,7 +89,7 @@ const UserForm: React.FC<UserFormProps> = (props) => {
       width={640}
       title={intl.formatMessage({
         id: 'system.User.modify_info',
-        defaultMessage: '编辑用户信息',
+        defaultMessage: '编辑学生信息',
       })}
       visible={props.visible}
       destroyOnClose
@@ -143,7 +143,7 @@ const UserForm: React.FC<UserFormProps> = (props) => {
               name="deptId"
               label={intl.formatMessage({
                 id: 'system.User.dept_id',
-                defaultMessage: '部门',
+                defaultMessage: '班级',
               })}
               request={async () => {
                 return depts;
@@ -268,15 +268,15 @@ const UserForm: React.FC<UserFormProps> = (props) => {
               name="status"
               label={intl.formatMessage({
                 id: 'system.User.status',
-                defaultMessage: '帐号状态',
+                defaultMessage: '账号状态',
               })}
               width="xl"
-              placeholder="请输入帐号状态"
+              placeholder="请输入账号状态"
               rules={[
                 {
                   required: false,
                   message: (
-                    <FormattedMessage id="请输入帐号状态！" defaultMessage="请输入帐号状态！" />
+                    <FormattedMessage id="请输入账号状态！" defaultMessage="请输入账号状态！" />
                   ),
                 },
               ]}
