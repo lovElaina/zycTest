@@ -15,7 +15,7 @@ import type { DataNode } from 'antd/lib/tree';
  *
  * @author whiteshader@163.com
  * @datetime  2021/09/16
- * 
+ *
  * */
 
 
@@ -124,15 +124,15 @@ const UserForm: React.FC<UserFormProps> = (props) => {
               name="nickName"
               label={intl.formatMessage({
                 id: 'system.User.nick_name',
-                defaultMessage: '用户昵称',
+                defaultMessage: '姓名',
               })}
               width="xl"
-              placeholder="请输入用户昵称"
+              placeholder="请输入姓名"
               rules={[
                 {
                   required: true,
                   message: (
-                    <FormattedMessage id="请输入用户昵称！" defaultMessage="请输入用户昵称！" />
+                    <FormattedMessage id="请输入姓名" defaultMessage="请输入姓名" />
                   ),
                 },
               ]}
@@ -149,12 +149,12 @@ const UserForm: React.FC<UserFormProps> = (props) => {
                 return depts;
               }}
               width="xl"
-              placeholder="请输入用户昵称"
+              placeholder="请输入姓名"
               rules={[
                 {
                   required: true,
                   message: (
-                    <FormattedMessage id="请输入用户昵称！" defaultMessage="请输入用户昵称！" />
+                    <FormattedMessage id="请输入姓名" defaultMessage="请输入姓名" />
                   ),
                 },
               ]}

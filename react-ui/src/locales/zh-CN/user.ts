@@ -3,14 +3,14 @@
  *
  * @author whiteshader@163.com
  * @datetime  2021/09/16
- * 
+ *
  * */
 
 export default {
-  'system.User.user_id': '用户ID',
-  'system.User.dept_id': '部门ID',
+  'system.User.user_id': '编号',
+  'system.User.dept_id': '班级',
   'system.User.user_name': '用户账号',
-  'system.User.nick_name': '用户昵称',
+  'system.User.nick_name': '姓名',
   'system.User.user_type': '用户类型',
   'system.User.email': '用户邮箱',
   'system.User.phonenumber': '手机号码',

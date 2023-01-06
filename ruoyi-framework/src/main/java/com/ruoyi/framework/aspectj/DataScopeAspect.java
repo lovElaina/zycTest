@@ -96,6 +96,7 @@ public class DataScopeAspect
         for (SysRole role : user.getRoles())
         {
             String dataScope = role.getDataScope();
+            //不是自定义权限类型
             if (!DATA_SCOPE_CUSTOM.equals(dataScope) && conditions.contains(dataScope))
             {
                 continue;
@@ -148,6 +149,9 @@ public class DataScopeAspect
             {
                 BaseEntity baseEntity = (BaseEntity) params;
                 baseEntity.getParams().put(DATA_SCOPE, " AND (" + sqlString.substring(4) + ")");
+                System.out.println("/////////////////////////////////////////////////////////////////////");
+                System.out.println( " AND (" + sqlString.substring(4) + ")");
+                System.out.println("/////////////////////////////////////////////////////////////////////");
             }
         }
     }

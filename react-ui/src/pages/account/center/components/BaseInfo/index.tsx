@@ -31,15 +31,15 @@ const BaseInfo: React.FC<BaseInfoProps> = (props) => {
             name="nickName"
             label={intl.formatMessage({
               id: 'system.User.nick_name',
-              defaultMessage: '用户昵称',
+              defaultMessage: '姓名',
             })}
             width="xl"
-            placeholder="请输入用户昵称"
+            placeholder="请输入姓名"
             rules={[
               {
                 required: true,
                 message: (
-                  <FormattedMessage id="请输入用户昵称！" defaultMessage="请输入用户昵称！" />
+                  <FormattedMessage id="请输入姓名" defaultMessage="请输入姓名" />
                 ),
               },
             ]}

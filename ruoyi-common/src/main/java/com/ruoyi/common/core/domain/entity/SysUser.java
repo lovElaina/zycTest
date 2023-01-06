@@ -34,7 +34,7 @@ public class SysUser extends BaseEntity
     private String userName;
 
     /** 用户昵称 */
-    @Excel(name = "用户名称")
+    @Excel(name = "姓名")
     private String nickName;
 
     /** 用户邮箱 */
@@ -129,8 +129,8 @@ public class SysUser extends BaseEntity
         this.deptId = deptId;
     }
 
-    @Xss(message = "用户昵称不能包含脚本字符")
-    @Size(min = 0, max = 30, message = "用户昵称长度不能超过30个字符")
+    @Xss(message = "姓名不能包含脚本字符")
+    @Size(min = 0, max = 30, message = "姓名长度不能超过30个字符")
     public String getNickName()
     {
         return nickName;

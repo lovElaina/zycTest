@@ -8,7 +8,7 @@ import type { DeptType } from '../data.d';
  *
  * @author whiteshader@163.com
  * @datetime  2021/09/16
- * 
+ *
  * */
 
 export type DeptFormValueType = Record<string, unknown> & Partial<DeptType>;
@@ -78,16 +78,16 @@ const DeptForm: React.FC<DeptFormProps> = (props) => {
               name="deptId"
               label={intl.formatMessage({
                 id: 'system.Dept.dept_id',
-                defaultMessage: '部门id',
+                defaultMessage: '组织id',
               })}
               width="xl"
-              placeholder="请输入部门id"
+              placeholder="请输入组织id"
               disabled
               hidden={!props.values.deptId}
               rules={[
                 {
                   required: false,
-                  message: <FormattedMessage id="请输入部门id！" defaultMessage="请输入部门id！" />,
+                  message: <FormattedMessage id="请输入组织id！" defaultMessage="请输入组织id！" />,
                 },
               ]}
             />
@@ -99,18 +99,18 @@ const DeptForm: React.FC<DeptFormProps> = (props) => {
                 name="parentId"
                 label={intl.formatMessage({
                   id: 'system.Dept.parent_dept',
-                  defaultMessage: '上级部门:',
+                  defaultMessage: '上级组织:',
                 })}
                 request={async () => {
                   return deptTree;
                 }}
                 width="xl"
-                placeholder="请选择上级部门"
+                placeholder="请选择上级组织"
                 rules={[
                   {
                     required: true,
                     message: (
-                      <FormattedMessage id="请输入用户昵称！" defaultMessage="请选择上级部门!" />
+                      <FormattedMessage id="请输入姓名" defaultMessage="请选择上级组织" />
                     ),
                   },
                 ]}
@@ -247,16 +247,16 @@ const DeptForm: React.FC<DeptFormProps> = (props) => {
               name="status"
               label={intl.formatMessage({
                 id: 'system.Dept.status',
-                defaultMessage: '部门状态',
+                defaultMessage: '组织状态',
               })}
               labelCol={{ span: 24 }}
               width="xl"
-              placeholder="请输入部门状态"
+              placeholder="请输入组织状态"
               rules={[
                 {
                   required: false,
                   message: (
-                    <FormattedMessage id="请输入部门状态！" defaultMessage="请输入部门状态！" />
+                    <FormattedMessage id="请输入组织状态！" defaultMessage="请输入组织状态！" />
                   ),
                 },
               ]}

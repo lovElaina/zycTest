@@ -198,20 +198,20 @@ const UserTableList: React.FC = () => {
       hideInSearch: true,
     },
     {
-      title: <FormattedMessage id="system.User.dept_id" defaultMessage="部门ID" />,
-      dataIndex: 'deptId',
+      title: <FormattedMessage id="system.User.dept_id" defaultMessage="班级" />,
+      dataIndex: 'dept.deptName',
       valueType: 'text',
+    },
+    {
+      title: <FormattedMessage id="system.User.nick_name" defaultMessage="姓名" />,
+      dataIndex: 'nickName',
+      valueType: 'text',
+      hideInSearch: true,
     },
     {
       title: <FormattedMessage id="system.User.user_name" defaultMessage="用户账号" />,
       dataIndex: 'userName',
       valueType: 'text',
-    },
-    {
-      title: <FormattedMessage id="system.User.nick_name" defaultMessage="用户昵称" />,
-      dataIndex: 'nickName',
-      valueType: 'text',
-      hideInSearch: true,
     },
     {
       title: <FormattedMessage id="system.User.email" defaultMessage="用户邮箱" />,
