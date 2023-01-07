@@ -145,6 +145,14 @@ public interface ISysUserService
     public int updateUserStatus(SysUser user);
 
     /**
+     * 修改用户实习状态
+     *
+     * @param userId 用户信息
+     * @return 结果
+     */
+    public int updateUserInternshipStatus(String userId, String internshipStatus);
+
+    /**
      * 修改用户基本信息
      * 
      * @param user 用户信息

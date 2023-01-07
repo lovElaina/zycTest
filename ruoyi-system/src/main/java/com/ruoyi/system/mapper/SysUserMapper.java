@@ -83,7 +83,16 @@ public interface SysUserMapper
      * @param password 密码
      * @return 结果
      */
-    public int resetUserPwd(@Param("userName") String userName, @Param("password") String password);
+    public int resetUserPwd(@Param("userId") String userName, @Param("password") String password);
+
+    /**
+     * 更新用户实习状态
+     *
+     * @param userId 用户id
+     * @param internshipStatus 实习状态
+     * @return 结果
+     */
+    public int updateUserInternshipStatus(@Param("userId") String userId, @Param("internshipStatus") String internshipStatus);
 
     /**
      * 通过用户ID删除用户

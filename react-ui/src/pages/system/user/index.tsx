@@ -155,8 +155,10 @@ const UserTableList: React.FC = () => {
 
   const [selectDept, setSelectDept] = useState<any>({ id: 0 });
 
+  //字典配置
   const [sexOptions, setSexOptions] = useState<any>([]);
   const [statusOptions, setStatusOptions] = useState<any>([]);
+  const [internshipStatusOptions, setInternshipStatusOptions] = useState<any>([]);
 
   const [postIds, setPostIds] = useState<string[]>();
   const [postList, setPostList] = useState<string[]>();
@@ -179,13 +181,26 @@ const UserTableList: React.FC = () => {
         setSexOptions(opts);
       }
     });
+
     getDict('sys_normal_disable').then((res) => {
       if (res.code === 200) {
+        console.log(res)
         const opts = {};
         res.data.forEach((item: any) => {
           opts[item.dictValue] = item.dictLabel;
         });
         setStatusOptions(opts);
+      }
+    });
+
+    getDict('sys_user_internship').then((res) => {
+      if (res.code === 200) {
+        console.log(res)
+        const opts = {};
+        res.data.forEach((item: any) => {
+          opts[item.dictValue] = item.dictLabel;
+        });
+        setInternshipStatusOptions(opts);
       }
     });
   }, []);
@@ -208,6 +223,12 @@ const UserTableList: React.FC = () => {
       valueType: 'text',
       width: '120px',
       hideInSearch: true,
+    },
+    {
+      title: "实习情况",
+      dataIndex: 'internshipStatus',
+      valueType: 'select',
+      valueEnum: internshipStatusOptions,
     },
     {
       title: <FormattedMessage id="system.User.user_name" defaultMessage="用户账号" />,

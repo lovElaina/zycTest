@@ -59,6 +59,9 @@ public class SysUser extends BaseEntity
     @Excel(name = "帐号状态", readConverterExp = "0=正常,1=停用")
     private String status;
 
+    /** 实习状态（0正常 1未开始 2已结束） */
+    private String internshipStatus;
+
     /** 删除标志（0代表存在 2代表删除） */
     private String delFlag;
 
@@ -215,6 +218,14 @@ public class SysUser extends BaseEntity
     public void setStatus(String status)
     {
         this.status = status;
+    }
+
+    public String getInternshipStatus() {
+        return internshipStatus;
+    }
+
+    public void setInternshipStatus(String internshipStatus) {
+        this.internshipStatus = internshipStatus;
     }
 
     public String getDelFlag()

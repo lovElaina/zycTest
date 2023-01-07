@@ -60,6 +60,7 @@ const UserForm: React.FC<UserFormProps> = (props) => {
       avatar: props.values.avatar,
       password: props.values.password,
       status: props.values.status,
+      internshipStatus:props.values.internshipStatus,
       delFlag: props.values.delFlag,
       loginIp: props.values.loginIp,
       loginDate: props.values.loginDate,

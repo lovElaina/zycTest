@@ -8,7 +8,7 @@ const { DirectoryTree } = Tree;
  *
  * @author whiteshader@163.com
  * @datetime  2021/09/16
- * 
+ *
  * */
 
 
@@ -28,9 +28,18 @@ const DeptTree: React.FC<TreeProps> = (props) => {
         const exKeys = [];
         exKeys.push('1');
         setTreeData(res);
+        console.log(res);
         exKeys.push(res[0].children[0].id);
+        exKeys.push('2');
+        exKeys.push(res[0].children[1].id);
+        exKeys.push('3');
+        exKeys.push(res[0].children[2].id);
+        exKeys.push('4');
+        exKeys.push(res[0].children[3].id);
+        exKeys.push('5');
+        exKeys.push(res[0].children[4].id);
         setExpandedKeys(exKeys);
-        props.onSelect(res[0].children[0]);
+        props.onSelect(res[0]);
       });
       hide();
       // message.success('数据查询成功');

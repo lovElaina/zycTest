@@ -326,6 +326,18 @@ public class SysUserServiceImpl implements ISysUserService
     }
 
     /**
+     * 修改用户实习状态
+     *
+     * @param userId 用户Id
+     * @return 结果
+     */
+    @Override
+    public int updateUserInternshipStatus(String userId, String internshipStatus)
+    {
+        return userMapper.updateUserInternshipStatus(userId,internshipStatus);
+    }
+
+    /**
      * 修改用户基本信息
      * 
      * @param user 用户信息

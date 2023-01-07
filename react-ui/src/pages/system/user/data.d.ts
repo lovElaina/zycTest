@@ -20,6 +20,7 @@ export type UserType = {
   avatar: string;
   password: string;
   status: string;
+  internshipStatus: string;
   delFlag: string;
   loginIp: string;
   loginDate: Date;
