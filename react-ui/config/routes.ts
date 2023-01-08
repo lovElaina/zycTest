@@ -2,7 +2,7 @@
  *
  * @author whiteshader@163.com
  * @datetime  2022/02/22
- * 
+ *
  * */
 
 export default [
@@ -37,24 +37,29 @@ export default [
       },
     ],
   },
+
   {
     path: '/dashboard',
     name: 'dashboard',
     icon: 'dashboard',
     component: '@/layouts/TabsLayout',
     routes: [
+      // {
+      //   path: '/dashboard',
+      //   redirect: '/dashboard/analysis',
+      // },
       {
         path: '/dashboard',
-        redirect: '/dashboard/analysis',
+        redirect: '/dashboard/index',
       },
       {
-        name: 'analysis',
+        name: 'index',
         icon: 'smile',
-        path: '/dashboard/analysis',
-        component: './dashboard/analysis',
+        path: '/dashboard/index',
+        component: './dashboard/index',
         wrappers: ['@/components/KeepAlive'],
         KeepAlive: true,
-        title: 'menu.dashboard.analysis'
+        title: '主页面'
       },
       {
         name: 'monitor',
@@ -116,6 +121,16 @@ export default [
         path: '/',
         redirect: '/system/user',
       },
+      // {
+      //   name: 'tutor',
+      //   icon: 'PartitionOutlined',
+      //   path: '/system/tutor',
+      //   component: 'system/tutor/index',
+      //   access: 'authorize',
+      //   wrappers: ['@/components/KeepAlive'],
+      //   KeepAlive: true,
+      //   title: '导师管理'
+      // },
       {
         name: 'user',
         icon: 'PartitionOutlined',
@@ -335,7 +350,7 @@ export default [
         name: 'gen',
         icon: 'PartitionOutlined',
         path: '/tool/gen',
-        component: 'tool/gen/index', 
+        component: 'tool/gen/index',
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],
         KeepAlive: true,
@@ -363,6 +378,31 @@ export default [
       },
     ],
   },
+
+  {
+    name: 'internship',
+    icon: 'BugOutlined',
+    path: '/internship',
+    component: '@/layouts/TabsLayout',
+    routes: [
+      {
+        path: '/',
+        redirect: '/internship/tutor',
+      },
+      {
+        name: 'tutor',
+        icon: 'PartitionOutlined',
+        path: '/internship/tutor',
+        component: 'internship/tutor/index',
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        KeepAlive: true,
+        title: '导师管理'
+      },
+    ],
+
+  },
+
   {
     path: '/',
     redirect: '/dashboard',

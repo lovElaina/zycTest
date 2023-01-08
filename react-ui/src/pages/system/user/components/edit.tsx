@@ -33,6 +33,7 @@ export type UserFormProps = {
   roleIds: string[];
   roles: string[];
   depts: DataNode[];
+  internshipStatusOptions:any;
 };
 
 const UserForm: React.FC<UserFormProps> = (props) => {
@@ -40,8 +41,8 @@ const UserForm: React.FC<UserFormProps> = (props) => {
 
   const [userId, setUserId] = useState<any>('');
 
-  const { sexOptions, statusOptions } = props;
-  const { roles, posts, depts } = props;
+  const { sexOptions, statusOptions, internshipStatusOptions } = props;
+  const { roles, depts } = props;
 
   useEffect(() => {
     form.resetFields();
@@ -308,22 +309,22 @@ const UserForm: React.FC<UserFormProps> = (props) => {
         <Row gutter={[16, 16]}>
           <Col span={12} order={1}>
             <ProFormSelect
-              name="postIds"
-              mode="multiple"
+              name="internshipStatus"
+              mode="single"
+              valueEnum={internshipStatusOptions}
               width="xl"
               label={intl.formatMessage({
                 id: 'post',
-                defaultMessage: '岗位',
+                defaultMessage: '实习情况',
               })}
-              options={posts}
-              placeholder="请选择岗位"
-              rules={[{ required: true, message: '请选择岗位!' }]}
+              placeholder="请选择实习情况"
+              rules={[{ required: true, message: '请选择实习情况!' }]}
             />
           </Col>
           <Col span={12} order={2}>
             <ProFormSelect
               name="roleIds"
-              mode="multiple"
+              mode="single"
               width="xl"
               label={intl.formatMessage({
                 id: 'role',

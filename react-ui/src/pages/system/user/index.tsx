@@ -166,6 +166,8 @@ const UserTableList: React.FC = () => {
   const [roleList, setRoleList] = useState<string[]>();
   const [deptTree, setDeptTree] = useState<DataNode[]>();
 
+
+
   const access = useAccess();
 
   /** 国际化配置 */
@@ -285,6 +287,7 @@ const UserTableList: React.FC = () => {
               );
             };
             fetchUserInfo(record.userId);
+            console.log(postList);
             getDeptTree({}).then((treeData) => {
               setDeptTree(treeData);
             });
@@ -514,6 +517,7 @@ const UserTableList: React.FC = () => {
         roles={roleList || []}
         roleIds={roleIds || []}
         depts={deptTree || []}
+        internshipStatusOptions={internshipStatusOptions}
       />
 
       <ResetPwd
