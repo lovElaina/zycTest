@@ -1,11 +1,3 @@
-
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
 export default {
   'monitor.Operlog.detail': '操作日志详细信息',
   'monitor.Operlog.oper_id': '日志主键',

@@ -15,13 +15,6 @@ import { buildTreeData } from '@/utils/utils';
 import type { DataNode } from 'antd/lib/tree';
 import { createIcon } from '@/utils/IconUtil';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
 
 /**
  * 添加节点

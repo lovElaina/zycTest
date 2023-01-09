@@ -4,13 +4,6 @@ import { Form, Modal } from 'antd';
 import { useIntl, FormattedMessage } from 'umi';
 import type { DictTypeType } from '../data.d';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
 
 export type DictTypeFormValueType = Record<string, unknown> & Partial<DictTypeType>;
 

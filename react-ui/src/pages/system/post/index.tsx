@@ -12,13 +12,6 @@ import { getPostList, removePost, addPost, updatePost, exportPost } from './serv
 import UpdateForm from './components/edit';
 import { getDict } from '../dict/service';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
 
 /**
  * 添加节点
@@ -118,7 +111,7 @@ const handleRemoveOne = async (selectedRow: PostType) => {
 const handleExport = async () => {
   const hide = message.loading('正在导出');
   try {
-    await exportPost();    
+    await exportPost();
     hide();
     message.success('导出成功');
     return true;

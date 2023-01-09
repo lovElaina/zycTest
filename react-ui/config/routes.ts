@@ -1,11 +1,4 @@
-﻿/* *
- *
- * @author whiteshader@163.com
- * @datetime  2022/02/22
- *
- * */
-
-export default [
+﻿export default [
   {
     path: '/user',
     layout: false,
@@ -119,7 +112,7 @@ export default [
     routes: [
       {
         path: '/',
-        redirect: '/system/user',
+        redirect: '/system/menu',
       },
       // {
       //   name: 'tutor',
@@ -131,16 +124,16 @@ export default [
       //   KeepAlive: true,
       //   title: '导师管理'
       // },
-      {
-        name: 'user',
-        icon: 'PartitionOutlined',
-        path: '/system/user',
-        component: 'system/user/index',
-        access: 'authorize',
-        wrappers: ['@/components/KeepAlive'],
-        KeepAlive: true,
-        title: 'menu.title.user'
-      },
+      // {
+      //   name: 'user',
+      //   icon: 'PartitionOutlined',
+      //   path: '/system/user',
+      //   component: 'system/user/index',
+      //   access: 'authorize',
+      //   wrappers: ['@/components/KeepAlive'],
+      //   KeepAlive: true,
+      //   title: 'menu.title.user'
+      // },
       {
         name: 'menu',
         icon: 'PartitionOutlined',
@@ -161,16 +154,16 @@ export default [
         KeepAlive: true,
         title: 'menu.title.role'
       },
-      {
-        name: 'dept',
-        icon: 'PartitionOutlined',
-        path: '/system/dept',
-        component: 'system/dept/index',
-        access: 'authorize',
-        wrappers: ['@/components/KeepAlive'],
-        KeepAlive: true,
-        title: 'menu.title.dept'
-      },
+      // {
+      //   name: 'dept',
+      //   icon: 'PartitionOutlined',
+      //   path: '/system/dept',
+      //   component: 'system/dept/index',
+      //   access: 'authorize',
+      //   wrappers: ['@/components/KeepAlive'],
+      //   KeepAlive: true,
+      //   title: 'menu.title.dept'
+      // },
       {
         name: 'post',
         icon: 'PartitionOutlined',
@@ -387,7 +380,7 @@ export default [
     routes: [
       {
         path: '/',
-        redirect: '/internship/tutor',
+        redirect: '/internship/user',
       },
       {
         name: 'tutor',
@@ -398,6 +391,36 @@ export default [
         wrappers: ['@/components/KeepAlive'],
         KeepAlive: true,
         title: '导师管理'
+      },
+      {
+        name: 'user',
+        icon: 'PartitionOutlined',
+        path: '/internship/user',
+        component: 'internship/user/index',
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        KeepAlive: true,
+        title: 'menu.title.user'
+      },
+      {
+        name: 'dept',
+        icon: 'PartitionOutlined',
+        path: '/internship/dept',
+        component: 'internship/dept/index',
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        KeepAlive: true,
+        title: 'menu.title.dept'
+      },
+      {
+        name: 'attendance',
+        icon: 'PartitionOutlined',
+        path: '/internship/attendance',
+        component: 'internship/attendance/index',
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        KeepAlive: true,
+        title: '考勤管理'
       },
     ],
 

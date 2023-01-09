@@ -13,13 +13,6 @@ import { getNoticeList, removeNotice, addNotice, updateNotice } from './service'
 import UpdateForm from './components/edit';
 import { getDict } from '../dict/service';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
 
 /**
  * 添加节点
@@ -53,7 +46,7 @@ const handleUpdate = async (fields: NoticeType) => {
   const hide = message.loading('正在配置');
   try {
     const resp = await updateNotice(fields);
-    hide();   
+    hide();
     if(resp.code === 200) {
       message.success('配置成功');
     } else {

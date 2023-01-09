@@ -18,12 +18,6 @@ import {
 import UpdateForm from './components/edit';
 import { getDict, getDictType, getDictTypeList } from '../dict/service';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- *
- * */
 
 /**
  * 添加节点
@@ -140,7 +134,7 @@ const DictDataTableList: React.FC<DictDataProps> = (props) => {
 
   const [dictTypeOptions, setDictTypeOptions] = useState<any>([]);
   const [statusOptions, setStatusOptions] = useState<any>([]);
-  
+
   const access = useAccess();
 
   /** 国际化配置 */
@@ -185,7 +179,7 @@ const DictDataTableList: React.FC<DictDataProps> = (props) => {
     }
   }, [dictId, dictType, props.match?.params]);
 
-    
+
   /**
    * 导出数据
    *
@@ -196,7 +190,7 @@ const DictDataTableList: React.FC<DictDataProps> = (props) => {
     try {
       await exportDictData({dictType});
       hide();
-      message.success('导出成功');    
+      message.success('导出成功');
       return true;
     } catch (error) {
       hide();

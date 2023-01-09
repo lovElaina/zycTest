@@ -2,13 +2,6 @@ import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
 import type { OperlogType, OperlogListParams } from './data.d';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
 
 // 查询操作日志记录列表
 export async function getOperlogList(params?: OperlogListParams) {

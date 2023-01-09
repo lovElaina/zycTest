@@ -7,14 +7,6 @@ import type { CpuRowType, MemRowType, ServerInfoResponseType, DiskInfoType } fro
 import WrapContent from '@/components/WrapContent';
 
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
-
 const columns = [
   {
     title: '属性',

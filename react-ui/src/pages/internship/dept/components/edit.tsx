@@ -2,14 +2,8 @@ import React, { useEffect } from 'react';
 import { ProFormDigit, ProFormText, ProFormRadio, ProFormTreeSelect } from '@ant-design/pro-form';
 import { Form, Modal, Row, Col } from 'antd';
 import { useIntl, FormattedMessage } from 'umi';
-import type { DeptType } from '../data.d';
+import type { DeptType } from '../data';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- *
- * */
 
 export type DeptFormValueType = Record<string, unknown> & Partial<DeptType>;
 

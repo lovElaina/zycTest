@@ -3,13 +3,6 @@ import { Modal, Descriptions, Button } from 'antd';
 import { useIntl, FormattedMessage } from 'umi';
 import type { OperlogType } from '../data';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
 
 export type OperlogFormValueType = Record<string, unknown> & Partial<OperlogType>;
 

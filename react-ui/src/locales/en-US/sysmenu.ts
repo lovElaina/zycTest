@@ -1,10 +1,3 @@
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
 export default {
   'system.Menu.menu_id': 'ID',
   'system.Menu.menu_name': 'Name',

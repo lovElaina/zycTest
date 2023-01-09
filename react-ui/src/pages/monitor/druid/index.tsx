@@ -1,12 +1,6 @@
 import React, { useEffect } from 'react';
 import defaultSettings from '../../../../config/defaultSettings';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
 
 const DruidInfo: React.FC = () => {
   useEffect(() => {

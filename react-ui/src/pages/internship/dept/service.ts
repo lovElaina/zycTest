@@ -1,14 +1,6 @@
 import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
-import type { DeptType, DeptListParams } from './data.d';
-
-
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
+import type { DeptType, DeptListParams } from './data';
 
 
 // 查询部门列表

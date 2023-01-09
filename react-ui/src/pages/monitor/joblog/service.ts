@@ -3,14 +3,6 @@ import request from '@/utils/request';
 import type { JobLogType, JobLogListParams } from './data.d';
 
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
-
 // 查询定时任务调度日志列表
 export async function getJobLogList(params?: JobLogListParams) {
   const queryString = new URLSearchParams(params).toString();

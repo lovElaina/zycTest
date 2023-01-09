@@ -14,12 +14,6 @@ import IconSelector from '@/components/IconSelector';
 import { createIcon } from '@/utils/IconUtil';
 import { IntlProvider } from 'react-intl';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- *
- * */
 
 export type MenuFormValueType = Record<string, unknown> & Partial<MenuType>;
 

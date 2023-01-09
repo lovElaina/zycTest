@@ -1,10 +1,3 @@
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
 export default {
   'system.Role.role_id': '角色ID',
   'system.Role.role_name': '角色名称',

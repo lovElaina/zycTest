@@ -1,10 +1,3 @@
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
 export default {
   'system.Menu.menu_id': '菜单ID',
   'system.Menu.menu_name': '菜单名称',

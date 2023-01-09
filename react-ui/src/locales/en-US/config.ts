@@ -1,10 +1,3 @@
-
-/**
- *
- * @author whiteshader@163.com
- *
- * */
-
 export default {
   'system.Config.config_id': 'ID',
   'system.Config.config_name': 'Name',

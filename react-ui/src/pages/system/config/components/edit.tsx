@@ -4,12 +4,6 @@ import { Form, Modal, Row, Col } from 'antd';
 import { useIntl, FormattedMessage } from 'umi';
 import type { ConfigType } from '../data.d';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
 
 export type ConfigFormValueType = Record<string, unknown> & Partial<ConfigType>;
 

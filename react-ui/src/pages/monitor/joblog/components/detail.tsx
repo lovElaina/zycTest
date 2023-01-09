@@ -3,12 +3,6 @@ import { Form, Modal, Descriptions } from 'antd';
 import { useIntl, FormattedMessage } from 'umi';
 import type { JobLogType } from '../data';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
 
 export type JobLogFormValueType = Record<string, unknown> & Partial<JobLogType>;
 

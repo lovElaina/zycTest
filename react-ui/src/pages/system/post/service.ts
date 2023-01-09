@@ -2,14 +2,6 @@ import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
 import type { PostType, PostListParams } from './data.d';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
-
 
 // 查询岗位信息列表
 export async function getPostList (params?: PostListParams) {
@@ -57,6 +49,6 @@ export async function removePost (ids: string) {
 }
 
 // 导出岗位信息
-export function exportPost (params?: PostListParams) {  
+export function exportPost (params?: PostListParams) {
   return downLoadXlsx(`/system/post/export`, { params }, `post_${new Date().getTime()}.xlsx`);
 }

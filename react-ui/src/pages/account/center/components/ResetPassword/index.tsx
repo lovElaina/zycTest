@@ -3,7 +3,7 @@ import { Form, message } from 'antd';
 import { FormattedMessage } from 'react-intl';
 import ProForm, { ProFormText } from '@ant-design/pro-form';
 import { useIntl } from 'umi';
-import { updateUserPwd } from '@/pages/system/user/service';
+import { updateUserPwd } from '@/pages/internship/user/service';
 
 const ResetPassword: React.FC = () => {
   const [form] = Form.useForm();
@@ -28,7 +28,7 @@ const ResetPassword: React.FC = () => {
 
   return (
     <>
-      <ProForm form={form} onFinish={handleFinish}>       
+      <ProForm form={form} onFinish={handleFinish}>
           <ProFormText
             name="oldPassword"
             label={intl.formatMessage({

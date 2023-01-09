@@ -1,13 +1,6 @@
-
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- *
- * */
-
 export type UserType = {
   userId: number;
+  studentId: string;
   deptId: number;
   // deptName: string;
   // dept: any;
@@ -36,6 +29,9 @@ export type UserType = {
   roleIds: [];
   roles: [];
   searchValue: string;
+  tutorId:string;
+  startTime:number;
+  endTime:number;
 };
 
 export type UserListPagination = {

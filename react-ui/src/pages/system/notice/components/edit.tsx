@@ -10,13 +10,6 @@ import { Form, Modal, Row, Col } from 'antd';
 import { useIntl, FormattedMessage } from 'umi';
 import type { NoticeType } from '../data.d';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
 
 export type NoticeFormValueType = Record<string, unknown> & Partial<NoticeType>;
 

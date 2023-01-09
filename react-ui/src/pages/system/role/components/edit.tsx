@@ -10,12 +10,6 @@ import { useIntl, FormattedMessage } from 'umi';
 import type { RoleType } from '../data.d';
 import type { DataNode } from 'antd/lib/tree';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- *
- * */
 
 export type RoleFormValueType = Record<string, unknown> & Partial<RoleType>;
 
@@ -35,7 +29,7 @@ const RoleForm: React.FC<RoleFormProps> = (props) => {
   const { menuTree, menuCheckedKeys } = props;
   const [menuIds, setMenuIds] = useState<any>();
   const { statusOptions } = props;
-  
+
   useEffect(() => {
     form.resetFields();
     form.setFieldsValue({

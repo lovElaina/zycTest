@@ -55,7 +55,7 @@ public class SysUserController extends BaseController
     private ISysPostService postService;
 
     /**
-     * 获取学生列表
+     * 获取用户列表
      */
     @PreAuthorize("@ss.hasPermi('system:user:list')")
     @GetMapping("/list")
@@ -65,6 +65,34 @@ public class SysUserController extends BaseController
         List<SysUser> list = userService.selectUserList(user);
         return getDataTable(list);
     }
+
+
+    /**
+     * 获取学生列表
+     */
+    @PreAuthorize("@ss.hasPermi('system:user:list')")
+    @GetMapping("/studentlist")
+    public TableDataInfo studentlist(SysUser user)
+    {
+        startPage();
+        List<SysUser> list = userService.selectStudentList(user);
+        return getDataTable(list);
+    }
+
+
+    /**
+     * 获取导师列表
+     */
+    @PreAuthorize("@ss.hasPermi('system:user:list')")
+    @GetMapping("/tutorlist")
+    public TableDataInfo tutorlist(SysUser user)
+    {
+        startPage();
+        List<SysUser> list = userService.selectTutorList(user);
+        return getDataTable(list);
+    }
+
+
 
     @Log(title = "学生管理", businessType = BusinessType.EXPORT)
     @PreAuthorize("@ss.hasPermi('system:user:export')")

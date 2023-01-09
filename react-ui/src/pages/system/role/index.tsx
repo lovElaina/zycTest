@@ -22,13 +22,6 @@ import { getMenuTree } from '../menu/service';
 import { formatTreeSelectData } from '@/utils/utils';
 import WrapContent from '@/components/WrapContent';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
 
 /**
  * 添加节点
@@ -128,7 +121,7 @@ const handleRemoveOne = async (selectedRow: RoleType) => {
 const handleExport = async () => {
   const hide = message.loading('正在导出');
   try {
-    await exportRole();   
+    await exportRole();
     hide();
     message.success('导出成功');
     return true;

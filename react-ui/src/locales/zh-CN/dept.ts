@@ -1,11 +1,3 @@
-
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- *
- * */
-
 export default {
   'system.Dept.dept_id': '组织id',
   'system.Dept.parent_dept': '上级组织',

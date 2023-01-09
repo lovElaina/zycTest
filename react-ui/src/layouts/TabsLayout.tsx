@@ -3,12 +3,6 @@ import defaultSettings from '../../config/defaultSettings';
 
 const { tabsLayout } = defaultSettings;
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2022/02/22
- *
- * */
 
 const TabsLayout: React.FC = (props) => {
   const renderTabs = () => {

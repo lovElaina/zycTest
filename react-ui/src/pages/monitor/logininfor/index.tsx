@@ -16,13 +16,6 @@ import {
 import { getDict } from '@/pages/system/dict/service';
 import WrapContent from '@/components/WrapContent';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- *
- * */
-
 const { confirm } = Modal;
 
 /**
@@ -84,7 +77,7 @@ const handleExport = async () => {
   const hide = message.loading('正在导出');
   try {
     await exportLogininfor();
-    message.success('导出成功');    
+    message.success('导出成功');
     hide();
     return true;
   } catch (error) {

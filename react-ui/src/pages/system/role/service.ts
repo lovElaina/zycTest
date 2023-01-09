@@ -2,13 +2,6 @@ import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
 import type { RoleType, RoleListParams } from './data.d';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
 
 // 查询角色信息列表
 export async function getRoleList(params?: RoleListParams) {

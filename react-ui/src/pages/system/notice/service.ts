@@ -2,13 +2,6 @@ import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
 import type { NoticeType, NoticeListParams } from './data.d';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
 // 查询通知公告列表
 export async function getNoticeList(params?: NoticeListParams) {
   const queryString = new URLSearchParams(params).toString();

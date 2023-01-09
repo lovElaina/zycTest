@@ -13,13 +13,6 @@ import UpdateForm from './components/edit';
 import { getDict } from '../dict/service';
 
 /**
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * */
-
-
-/**
  * 添加节点
  *
  * @param fields
@@ -117,7 +110,7 @@ const handleRemoveOne = async (selectedRow: ConfigType) => {
 const handleExport = async () => {
   const hide = message.loading('正在导出');
   try {
-    await exportConfig();    
+    await exportConfig();
     hide();
     message.success('导出成功');
     return true;

@@ -18,13 +18,6 @@ import {
 } from './service';
 import UpdateForm from './components/edit';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- *
- * */
-
 /**
  * 添加节点
  *
@@ -144,7 +137,7 @@ const DictTypeTableList: React.FC = () => {
   const [selectedRowsState, setSelectedRows] = useState<DictTypeType[]>([]);
 
   const [statusOptions, setStatusOptions] = useState<any>([]);
-  
+
   const access = useAccess();
 
   /** 国际化配置 */

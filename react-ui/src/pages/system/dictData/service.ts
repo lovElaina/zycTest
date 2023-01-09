@@ -2,13 +2,6 @@ import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
 import type { DictDataType, DictDataListParams } from './data.d';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
 
 // 查询字典数据列表
 export async function getDictDataList(params?: DictDataListParams) {

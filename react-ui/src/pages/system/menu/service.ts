@@ -2,13 +2,6 @@ import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
 import type { MenuType, MenuListParams } from './data.d';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
 
 // 查询菜单权限列表
 export async function getMenuList(params?: MenuListParams) {

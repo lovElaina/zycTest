@@ -1,11 +1,3 @@
-
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
 export default {
   'monitor.JobLog.title': '定时任务调度日志',
   'monitor.JobLog.job_log_id': '任务日志ID',

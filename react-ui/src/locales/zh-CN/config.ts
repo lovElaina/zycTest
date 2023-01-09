@@ -1,10 +1,3 @@
-
-/**
- *
- * @author whiteshader@163.com
- *
- * */
-
 export default {
   'system.Config.config_id': '参数主键',
   'system.Config.config_name': '参数名称',

@@ -1,11 +1,3 @@
-
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
 export default {
   'monitor.Logininfor.info_id': 'ID',
   'monitor.Logininfor.user_name': 'User',

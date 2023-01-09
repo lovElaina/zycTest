@@ -1,11 +1,3 @@
-
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
 export default {
   'monitor.Job.job_id': '任务ID',
   'monitor.Job.job_name': '任务名称',

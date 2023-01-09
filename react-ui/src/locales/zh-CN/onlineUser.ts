@@ -1,11 +1,3 @@
-
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
 export default {
   'monitor.OnlineUser.id': '编号',
   'monitor.OnlineUser.user_name': '用户账号',

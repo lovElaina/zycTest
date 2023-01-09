@@ -1,11 +1,3 @@
-
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
 export default {
   'system.User.user_id': 'User ID',
   'system.User.dept_id': 'Dept ID',

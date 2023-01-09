@@ -4,12 +4,6 @@ import { Form, Modal } from 'antd';
 import { useIntl, FormattedMessage } from 'umi';
 import type { DeptType } from '../../dept/data';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
 
 export type FormValueType = any & Partial<DeptType>;
 

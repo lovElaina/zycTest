@@ -8,7 +8,7 @@ import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import WrapContent from '@/components/WrapContent';
 import Card from 'antd/es/card';
-import type { UserType, UserListParams } from './data.d';
+import type { UserType, UserListParams } from './data';
 import {
   getUserList,
   getUser,
@@ -17,22 +17,16 @@ import {
   updateUser,
   exportUser,
   updateUserPwd,
-  getDeptTree,
+  getDeptTree, getTutorList,
 } from './service';
 import UpdateForm from './components/edit';
-import { getDict } from '../dict/service';
+import { getDict } from '../../system/dict/service';
 import ResetPwd from './components/ResetPwd';
 import DeptTree from './components/DeptTree';
 import type { DataNode } from 'antd/lib/tree';
-import { getPostList } from '../post/service';
-import { getRoleList } from '../role/service';
+import { getPostList } from '../../system/post/service';
+import { getRoleList } from '../../system/role/service';
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- *
- * */
 
 /**
  * 添加节点
@@ -159,6 +153,7 @@ const UserTableList: React.FC = () => {
   const [sexOptions, setSexOptions] = useState<any>([]);
   const [statusOptions, setStatusOptions] = useState<any>([]);
   const [internshipStatusOptions, setInternshipStatusOptions] = useState<any>([]);
+  const [tutorOptions, setTutorOptions] = useState<any>([]);
 
   const [postIds, setPostIds] = useState<string[]>();
   const [postList, setPostList] = useState<string[]>();
@@ -174,12 +169,26 @@ const UserTableList: React.FC = () => {
   const intl = useIntl();
 
   useEffect(() => {
+    getTutorList().then((res) => {
+      console.log(res.rows)
+      if(res.code === 200){
+        const opts = {};
+        res.rows.forEach((item:any) => {
+          opts[item.userId] = item.nickName;
+        })
+        console.log(opts);
+        setTutorOptions(opts);
+      }
+    })
+
+
     getDict('sys_user_sex').then((res) => {
       if (res.code === 200) {
         const opts = {};
         res.data.forEach((item: any) => {
           opts[item.dictValue] = item.dictLabel;
         });
+        console.log(opts);
         setSexOptions(opts);
       }
     });
@@ -209,13 +218,13 @@ const UserTableList: React.FC = () => {
 
   const columns: ProColumns<UserType>[] = [
     {
-      title: <FormattedMessage id="system.User.user_id" defaultMessage="编号" />,
-      dataIndex: 'userId',
+      title: '学号',
+      dataIndex: 'studentId',
       valueType: 'textarea',
       hideInSearch: true,
     },
     {
-      title: <FormattedMessage id="system.User.dept_id" defaultMessage="班级" />,
+      title: <FormattedMessage id="system.User.dept_id" defaultMessage="系别" />,
       dataIndex: ['dept','deptName'],
       valueType: 'text',
     },
@@ -227,18 +236,20 @@ const UserTableList: React.FC = () => {
       hideInSearch: true,
     },
     {
-      title: "实习情况",
-      dataIndex: 'internshipStatus',
+      title: "导师",
+      dataIndex: 'tutorId',
       valueType: 'select',
-      valueEnum: internshipStatusOptions,
+      valueEnum: tutorOptions,
+      width: '120px',
     },
     {
-      title: <FormattedMessage id="system.User.user_name" defaultMessage="用户账号" />,
+      title: "账号",
       dataIndex: 'userName',
       valueType: 'text',
+      width: '120px',
     },
     {
-      title: <FormattedMessage id="system.User.email" defaultMessage="用户邮箱" />,
+      title: "邮箱",
       dataIndex: 'email',
       valueType: 'text',
     },
@@ -248,11 +259,17 @@ const UserTableList: React.FC = () => {
       valueType: 'text',
     },
     {
-      title: <FormattedMessage id="system.User.status" defaultMessage="账号状态" />,
-      dataIndex: 'status',
+      title: "实习情况",
+      dataIndex: 'internshipStatus',
       valueType: 'select',
-      valueEnum: statusOptions,
+      valueEnum: internshipStatusOptions,
     },
+    // {
+    //   title: <FormattedMessage id="system.User.status" defaultMessage="账号状态" />,
+    //   dataIndex: 'status',
+    //   valueType: 'select',
+    //   valueEnum: statusOptions,
+    // },
     {
       title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="操作" />,
       dataIndex: 'option',
@@ -355,10 +372,7 @@ const UserTableList: React.FC = () => {
         </Col>
         <Col lg={18} md={24}>
           <ProTable<UserType>
-            headerTitle={intl.formatMessage({
-              id: 'pages.searchTable.title',
-              defaultMessage: '信息',
-            })}
+            headerTitle="学生列表"
             actionRef={actionRef}
             formRef={formTableRef}
             rowKey="userId"
@@ -410,6 +424,10 @@ const UserTableList: React.FC = () => {
                 <PlusOutlined />{' '}
                 <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
               </Button>,
+
+
+
+
               <Button
                 type="primary"
                 key="remove"
@@ -425,6 +443,11 @@ const UserTableList: React.FC = () => {
                 <DeleteOutlined />
                 <FormattedMessage id="pages.searchTable.delete" defaultMessage="删除" />
               </Button>,
+
+
+
+
+
               <Button
                 type="primary"
                 key="export"
@@ -455,6 +478,8 @@ const UserTableList: React.FC = () => {
           />
         </Col>
       </Row>
+
+
       {selectedRowsState?.length > 0 && (
         <FooterToolbar
           extra={
@@ -491,6 +516,10 @@ const UserTableList: React.FC = () => {
       <UpdateForm
         onSubmit={async (values) => {
           let success = false;
+          values.roleIds = [4];
+          values.userId = currentRow?.userId;
+          values.startTime = Date.parse(values.dateRange[0]);
+          values.endTime = Date.parse(values.dateRange[1]);
           if (values.userId) {
             success = await handleUpdate({ ...values } as UserType);
           } else {
@@ -518,6 +547,7 @@ const UserTableList: React.FC = () => {
         roleIds={roleIds || []}
         depts={deptTree || []}
         internshipStatusOptions={internshipStatusOptions}
+        tutorOptions={tutorOptions}
       />
 
       <ResetPwd

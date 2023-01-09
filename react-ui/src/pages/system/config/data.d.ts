@@ -1,9 +1,3 @@
-/**
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * */
-
 export type ConfigType = {
   configId: number;
   configName: string;

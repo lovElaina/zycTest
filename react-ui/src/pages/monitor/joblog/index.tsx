@@ -13,14 +13,6 @@ import { getDict } from '@/pages/system/dict/service';
 import WrapContent from '@/components/WrapContent';
 
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/01
- * 
- * */
-
-
 /**
  * 删除节点
  *

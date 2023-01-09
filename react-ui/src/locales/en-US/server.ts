@@ -1,11 +1,3 @@
-
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
 export default {
   'monitor.server.cpu.cpuNum': 'CPUs',
   'monitor.server.cpu.total': 'Total',

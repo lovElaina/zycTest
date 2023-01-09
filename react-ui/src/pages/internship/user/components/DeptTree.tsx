@@ -4,13 +4,6 @@ import { getDeptTree } from '../service';
 
 const { DirectoryTree } = Tree;
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- *
- * */
-
 
 export type TreeProps = {
   onSelect: (values: any) => Promise<void>;

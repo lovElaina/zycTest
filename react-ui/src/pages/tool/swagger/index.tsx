@@ -1,11 +1,6 @@
 import React, { useEffect } from 'react';
 import defaultSettings from '../../../../config/defaultSettings';
 
-/**
- *
- * @author whiteshader@163.com
- *
- * */
 
 const CacheInfo: React.FC = () => {
   useEffect(() => {

@@ -2,21 +2,13 @@ import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
 import { formatTreeSelectData } from '@/utils/utils';
 import type { DataNode } from 'antd/lib/tree';
-import type { UserType, UserListParams } from './data.d';
-
-
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
+import type { UserType, UserListParams } from './data';
 
 
 // 查询用户信息列表
 export async function getUserList(params?: UserListParams) {
   const queryString = new URLSearchParams(params).toString();
-  return request(`/system/user/list?${queryString}`, {
+  return request(`/system/user/studentlist?${queryString}`, {
     data: params,
     method: 'GET',
     headers: {
@@ -24,6 +16,18 @@ export async function getUserList(params?: UserListParams) {
     },
   });
 }
+
+// 查询导师信息列表
+export async function getTutorList() {
+  return request(`/system/user/tutorlist`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+    },
+  });
+}
+
+
 
 // 查询用户信息详细
 export function getUser(userId: number) {

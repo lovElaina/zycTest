@@ -2,15 +2,6 @@ import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
 import type { LogininforType, LogininforListParams } from './data.d';
 
-
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
-
 // 查询系统访问记录列表
 export async function getLogininforList(params?: LogininforListParams) {
   const queryString = new URLSearchParams(params).toString();

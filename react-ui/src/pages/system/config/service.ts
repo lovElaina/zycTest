@@ -3,14 +3,6 @@ import request from '@/utils/request';
 import type { ConfigType, ConfigListParams } from './data.d';
 
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
-
 // 查询参数配置列表
 export async function getConfigList(params?: ConfigListParams) {
   const queryString = new URLSearchParams(params).toString();

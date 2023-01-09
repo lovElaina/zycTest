@@ -9,15 +9,6 @@ import Gauge from '@/pages/dashboard/monitor/components/Charts/Gauge';
 import Pie from '@/pages/dashboard/analysis/components/Charts/Pie';
 
 
-
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2021/09/16
- * 
- * */
-
-
 const columns = [
   {
     title: 'col1',
