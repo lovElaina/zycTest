@@ -24,7 +24,7 @@ import { getDict } from '../../system/dict/service';
 import ResetPwd from './components/ResetPwd';
 import DeptTree from './components/DeptTree';
 import type { DataNode } from 'antd/lib/tree';
-import { getPostList } from '../../system/post/service';
+import { getPostList } from '../../internship/post/service';
 import { getRoleList } from '../../system/role/service';
 
 
@@ -159,6 +159,10 @@ const UserTableList: React.FC = () => {
   const [postList, setPostList] = useState<string[]>();
   const [roleIds, setRoleIds] = useState<string[]>();
   const [roleList, setRoleList] = useState<string[]>();
+
+  //const [tutorIds, setTutorIds] = useState<string[]>();
+
+
   const [deptTree, setDeptTree] = useState<DataNode[]>();
 
 
@@ -284,12 +288,15 @@ const UserTableList: React.FC = () => {
           onClick={() => {
             const fetchUserInfo = async (userId: number) => {
               const res = await getUser(userId);
+
+
+
               setPostIds(res.postIds);
               setPostList(
                 res.posts.map((item: any) => {
                   return {
                     value: item.postId,
-                    label: item.postName,
+                    label: item.companyName+ " - "+ item.postName,
                   };
                 }),
               );
@@ -400,7 +407,7 @@ const UserTableList: React.FC = () => {
                           res.rows.map((item: any) => {
                             return {
                               value: item.postId,
-                              label: item.postName,
+                              label: item.companyName+ " - "+ item.postName,
                             };
                           }),
                         );
@@ -517,9 +524,11 @@ const UserTableList: React.FC = () => {
         onSubmit={async (values) => {
           let success = false;
           values.roleIds = [4];
+          values.postIds = values.postIds instanceof Array ? values.postIds : [values.postIds];
           values.userId = currentRow?.userId;
           values.startTime = Date.parse(values.dateRange[0]);
           values.endTime = Date.parse(values.dateRange[1]);
+
           if (values.userId) {
             success = await handleUpdate({ ...values } as UserType);
           } else {

@@ -164,16 +164,16 @@
       //   KeepAlive: true,
       //   title: 'menu.title.dept'
       // },
-      {
-        name: 'post',
-        icon: 'PartitionOutlined',
-        path: '/system/post',
-        component: 'system/post/index',
-        access: 'authorize',
-        wrappers: ['@/components/KeepAlive'],
-        KeepAlive: true,
-        title: 'menu.title.post'
-      },
+      // {
+      //   name: 'post',
+      //   icon: 'PartitionOutlined',
+      //   path: '/system/post',
+      //   component: 'system/post/index',
+      //   access: 'authorize',
+      //   wrappers: ['@/components/KeepAlive'],
+      //   KeepAlive: true,
+      //   title: 'menu.title.post'
+      // },
       {
         name: 'dict',
         icon: 'PartitionOutlined',
@@ -421,6 +421,26 @@
         wrappers: ['@/components/KeepAlive'],
         KeepAlive: true,
         title: '考勤管理'
+      },
+      {
+        name: 'post',
+        icon: 'PartitionOutlined',
+        path: '/internship/post',
+        component: 'internship/post/index',
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        KeepAlive: true,
+        title: '岗位管理'
+      },
+      {
+        name: 'apply',
+        icon: 'PartitionOutlined',
+        path: '/internship/apply',
+        component: 'internship/apply/index',
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        KeepAlive: true,
+        title: '岗位管理'
       },
     ],
 

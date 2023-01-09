@@ -12,7 +12,7 @@ import {getTutorList, getTutor, updateTutorPwd, updateTutor, exportTutor, remove
 import UpdateForm from './components/edit';
 import { getDict } from '../../system/dict/service';
 import {DataNode} from "antd/lib/tree";
-import {getPostList} from "@/pages/system/post/service";
+import {getPostList} from "@/pages/internship/post/service";
 import {getRoleList} from "@/pages/system/role/service";
 
 import ResetPwd from "@/pages/internship/user/components/ResetPwd";

@@ -234,10 +234,7 @@ const DeptTableList: React.FC = () => {
     <WrapContent>
       <div style={{ width: '100%', float: 'right' }}>
         <ProTable<DeptType>
-          headerTitle={intl.formatMessage({
-            id: 'pages.searchTable.title',
-            defaultMessage: '信息',
-          })}
+          headerTitle="组织管理"
           actionRef={actionRef}
           formRef={formTableRef}
           rowKey="deptId"

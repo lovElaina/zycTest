@@ -36,13 +36,18 @@ const UserForm: React.FC<UserFormProps> = (props) => {
 
   const [userId, setUserId] = useState<any>('');
 
+  //const [isInternship, setIsInternship] = useState<any>(false);
+
   const { sexOptions, tutorOptions , internshipStatusOptions  } = props;
-  const { depts } = props;
+  const { posts ,depts } = props;
 
   useEffect(() => {
     console.log(Date.now())
     form.resetFields();
     setUserId(props.values.userId);
+
+    //setIsInternship(props.values.internshipStatus === "1");
+    console.log(props.values.startTime)
     form.setFieldsValue({
       userId: props.values.userId,
       studentId: props.values.studentId,
@@ -67,8 +72,8 @@ const UserForm: React.FC<UserFormProps> = (props) => {
       updateBy: props.values.updateBy,
       updateTime: props.values.updateTime,
       remark: props.values.remark,
-      tutorId:props.values.tutorId,
-      dateRange:[props.values.startTime, props.values.endTime],
+      tutorId:props.values.tutorId+"",
+      dateRange:[props.values.startTime-0, props.values.endTime-0],
     });
   }, [form, props]);
 
@@ -99,7 +104,7 @@ const UserForm: React.FC<UserFormProps> = (props) => {
     >
 
 
-      <Form form={form} onFinish={handleFinish} initialValues={{...props.values,dateRange: [Date.now(), Date.now() - 1000 * 60 * 60 * 24]}}>
+      <Form form={form} onFinish={handleFinish} initialValues={{...props.values}}>
         <Row gutter={[16, 16]}>
 
           <Col span={12} order={1}>
@@ -342,11 +347,38 @@ const UserForm: React.FC<UserFormProps> = (props) => {
           </Col>
         </Row>
 
-          <ProFormDateRangePicker
-            width="md"
-            name="dateRange"
-            label="实习起止时间"
-          />
+
+
+
+
+        <Row gutter={[16, 16]}>
+          <Col span={24} order={1}>
+            <ProFormDateRangePicker
+              width="md"
+              name="dateRange"
+              label="实习起止时间"
+            />
+          </Col>
+        </Row>
+
+
+          <Row gutter={[16, 16]}>
+            <Col span={24} order={1}>
+              <ProFormSelect
+                name="postIds"
+                mode="single"
+                width="xl"
+                label="岗位"
+                options={posts}
+                placeholder="请选择岗位"
+                rules={[{ required: true, message: '请选择岗位!' }]}
+              />
+            </Col>
+          </Row>
+
+
+
+
       </Form>
     </Modal>
   );

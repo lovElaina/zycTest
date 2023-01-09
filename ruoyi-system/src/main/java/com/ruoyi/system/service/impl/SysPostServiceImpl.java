@@ -90,23 +90,28 @@ public class SysPostServiceImpl implements ISysPostService
         return UserConstants.UNIQUE;
     }
 
-    /**
-     * 校验岗位编码是否唯一
-     * 
-     * @param post 岗位信息
-     * @return 结果
-     */
     @Override
-    public String checkPostCodeUnique(SysPost post)
-    {
-        Long postId = StringUtils.isNull(post.getPostId()) ? -1L : post.getPostId();
-        SysPost info = postMapper.checkPostCodeUnique(post.getPostCode());
-        if (StringUtils.isNotNull(info) && info.getPostId().longValue() != postId.longValue())
-        {
-            return UserConstants.NOT_UNIQUE;
-        }
-        return UserConstants.UNIQUE;
+    public String checkPostCodeUnique(SysPost post) {
+        return null;
     }
+
+//    /**
+//     * 校验岗位编码是否唯一
+//     *
+//     * @param post 岗位信息
+//     * @return 结果
+//     */
+//    @Override
+//    public String checkPostCodeUnique(SysPost post)
+//    {
+//        Long postId = StringUtils.isNull(post.getPostId()) ? -1L : post.getPostId();
+//        SysPost info = postMapper.checkPostCodeUnique(post.getPostCode());
+//        if (StringUtils.isNotNull(info) && info.getPostId().longValue() != postId.longValue())
+//        {
+//            return UserConstants.NOT_UNIQUE;
+//        }
+//        return UserConstants.UNIQUE;
+//    }
 
     /**
      * 通过岗位ID查询岗位使用数量
