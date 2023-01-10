@@ -71,4 +71,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
 
+
+
+    <insert id="insertAttend" parameterType="SysAttend" useGeneratedKeys="true" keyProperty="attendId">
+        insert into sys_attend(
+        <if test="attendId != null and attendId != 0">attend_id,</if>
+        <if test="userId != null and userId != 0">user_id,</if>
+        <if test="totalDay != null and totalDay != 0">total_day,</if>
+        <if test="attendDay != null and attendDay != ''">attend_day,</if>
+        <if test="leaveDay != null and leaveDay != ''">leave_day,</if>
+        <if test="absentDay != null and absentDay != ''">absent_Day,</if>
+        <if test="lateDay != null and lateDay != ''">late_day,</if>
+        <if test="status != null and status != ''">status,</if>
+        <if test="createBy != null and createBy != ''">create_by,</if>
+        <if test="remark != null and remark != ''">remark,</if>
+        create_time
+        )values(
+        <if test="attendId != null and attendId != ''">#{attendId},</if>
+        <if test="userId != null and userId != ''">#{userId},</if>
+        <if test="totalDay != null and totalDay != ''">#{totalDay},</if>
+        <if test="attendDay != null and attendDay != ''">#{attendDay},</if>
+        <if test="leaveDay != null and leaveDay != ''">#{leaveDay},</if>
+        <if test="absentDay != null and absentDay != ''">#{absentDay},</if>
+        <if test="lateDay != null and lateDay != ''">#{lateDay},</if>
+        <if test="status != null and status != ''">#{status},</if>
+        <if test="createBy != null and createBy != ''">#{createBy},</if>
+        <if test="remark != null and remark != ''">#{remark},</if>
+        sysdate()
+        )
+    </insert>
+
+    <delete id="deleteAttendByUserId" parameterType="Long">
+        update sys_attend set del_flag = '2' where user_id = #{userId}
+    </delete>
+
+
+
 </mapper>

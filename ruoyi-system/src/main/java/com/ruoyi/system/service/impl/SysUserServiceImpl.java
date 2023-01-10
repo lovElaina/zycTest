@@ -2,8 +2,12 @@ package com.ruoyi.system.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import javax.validation.Validator;
+
+import com.ruoyi.system.domain.SysAttend;
+import com.ruoyi.system.mapper.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +26,6 @@ import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.system.domain.SysPost;
 import com.ruoyi.system.domain.SysUserPost;
 import com.ruoyi.system.domain.SysUserRole;
-import com.ruoyi.system.mapper.SysPostMapper;
-import com.ruoyi.system.mapper.SysRoleMapper;
-import com.ruoyi.system.mapper.SysUserMapper;
-import com.ruoyi.system.mapper.SysUserPostMapper;
-import com.ruoyi.system.mapper.SysUserRoleMapper;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysUserService;
 
@@ -57,6 +56,9 @@ public class SysUserServiceImpl implements ISysUserService
 
     @Autowired
     private ISysConfigService configService;
+
+    @Autowired
+    private SysAttendMapper attendMapper;
 
     @Autowired
     protected Validator validator;
@@ -289,6 +291,9 @@ public class SysUserServiceImpl implements ISysUserService
         insertUserPost(user);
         // 新增用户与角色管理
         insertUserRole(user);
+        if(Objects.equals(user.getInternshipStatus(), "1")){
+            insertAttendItem(user);
+        }
         return rows;
     }
 
@@ -323,7 +328,37 @@ public class SysUserServiceImpl implements ISysUserService
         userPostMapper.deleteUserPostByUserId(userId);
         // 新增用户与岗位管理
         insertUserPost(user);
+        System.out.println("////////////////////////////////////////////////////////////////////////////////");
+        System.out.println(user.getInternshipStatus()+"sssss");
+        if(Objects.equals(user.getInternshipStatus(), "1")){
+            attendMapper.deleteAttendByUserId(userId);
+            insertAttendItem(user);
+        }else{
+            attendMapper.deleteAttendByUserId(userId);
+        }
+
         return userMapper.updateUser(user);
+    }
+
+
+
+    /**
+     * 根据用户信息添加
+     *
+     * @param user 用户信息
+     * @return 结果
+     */
+    public void insertAttendItem(SysUser user){
+        Long userId = user.getUserId();
+        SysAttend attend = new SysAttend();
+        attend.setUserId(userId);
+        attend.setAttendDay(0L);
+        attend.setAbsentDay(0L);
+        attend.setLateDay(0L);
+        attend.setLeaveDay(0L);
+        attend.setTotalDay(0L);
+        attend.setStatus(user.getInternshipStatus());
+        attendMapper.insertAttend(attend);
     }
 
     /**

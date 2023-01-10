@@ -244,7 +244,7 @@ const PostTableList = () => {
         const percent = Math.round(part/total * 100)  + "%";
         // const aaa = moment(record.user.endTime-0).format("YYYY-MM-DD");
         // const bbb = moment(record.user.startTime-0).format("YYYY-MM-DD");
-        return percent;
+        return percent === "NaN%" ? "暂无" : percent;
       }
     },
 

@@ -1,6 +1,6 @@
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 //import type { FormInstance } from 'antd';
-import { Button, message, Modal } from 'antd';
+import {Button, FormInstance, message, Modal, Tag} from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
 import { useIntl, FormattedMessage, useAccess } from 'umi';
 import { FooterToolbar } from '@ant-design/pro-layout';
@@ -8,7 +8,7 @@ import WrapContent from '@/components/WrapContent';
 //import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 //import type { PostType, PostListParams } from './data.d';
-import { getPostList, removePost, addPost, updatePost, exportPost } from './service';
+import {getPostList, removePost, addPost, updatePost, exportPost, getApplyList} from './service';
 import UpdateForm from './components/edit';
 import { getDict } from '../../system/dict/service'
 
@@ -18,23 +18,23 @@ import { getDict } from '../../system/dict/service'
  *
  * @param fields
  */
-const handleAdd = async (fields) => {
-  const hide = message.loading('正在添加');
-  try {
-    const resp = await addPost({ ...fields });
-    hide();
-    if(resp.code === 200) {
-      message.success('添加成功');
-    } else {
-      message.error(resp.msg);
-    }
-    return true;
-  } catch (error) {
-    hide();
-    message.error('添加失败请重试！');
-    return false;
-  }
-};
+// const handleAdd = async (fields) => {
+//   const hide = message.loading('正在添加');
+//   try {
+//     const resp = await addPost({ ...fields });
+//     hide();
+//     if(resp.code === 200) {
+//       message.success('添加成功');
+//     } else {
+//       message.error(resp.msg);
+//     }
+//     return true;
+//   } catch (error) {
+//     hide();
+//     message.error('添加失败请重试！');
+//     return false;
+//   }
+// };
 
 /**
  * 更新节点
@@ -64,30 +64,30 @@ const handleUpdate = async (fields) => {
  *
  * @param selectedRows
  */
-const handleRemove = async (selectedRows) => {
-  const hide = message.loading('正在删除');
-  if (!selectedRows) return true;
-  try {
-    const resp = await removePost(selectedRows.map((row) => row.postId).join(','));
-    hide();
-    if(resp.code === 200) {
-      message.success('删除成功，即将刷新');
-    } else {
-      message.error(resp.msg);
-    }
-    return true;
-  } catch (error) {
-    hide();
-    message.error('删除失败，请重试');
-    return false;
-  }
-};
+// const handleRemove = async (selectedRows) => {
+//   const hide = message.loading('正在删除');
+//   if (!selectedRows) return true;
+//   try {
+//     const resp = await removePost(selectedRows.map((row) => row.postId).join(','));
+//     hide();
+//     if(resp.code === 200) {
+//       message.success('删除成功，即将刷新');
+//     } else {
+//       message.error(resp.msg);
+//     }
+//     return true;
+//   } catch (error) {
+//     hide();
+//     message.error('删除失败，请重试');
+//     return false;
+//   }
+// };
 
 const handleRemoveOne = async (selectedRow) => {
   const hide = message.loading('正在删除');
   if (!selectedRow) return true;
   try {
-    const params = [selectedRow.postId];
+    const params = [selectedRow.applyId];
     const resp = await removePost(params.join(','));
     hide();
     if(resp.code === 200) {
@@ -108,30 +108,34 @@ const handleRemoveOne = async (selectedRow) => {
  *
  * @param id
  */
-const handleExport = async () => {
-  const hide = message.loading('正在导出');
-  try {
-    await exportPost();
-    hide();
-    message.success('导出成功');
-    return true;
-  } catch (error) {
-    hide();
-    message.error('导出失败，请重试');
-    return false;
-  }
-};
+// const handleExport = async () => {
+//   const hide = message.loading('正在导出');
+//   try {
+//     await exportPost();
+//     hide();
+//     message.success('导出成功');
+//     return true;
+//   } catch (error) {
+//     hide();
+//     message.error('导出失败，请重试');
+//     return false;
+//   }
+// };
 
 const PostTableList = () => {
-  const formTableRef = useRef();
+  //const formTableRef = useRef();
 
-  const [modalVisible, setModalVisible] = useState(false);
+  //const [modalVisible, setModalVisible] = useState(false);
 
   const actionRef = useRef();
   const [currentRow, setCurrentRow] = useState();
   const [selectedRowsState, setSelectedRows] = useState([]);
+  const formTableRef = useRef();
+  //const [statusOptions, setStatusOptions] = useState([]);
 
-  const [statusOptions, setStatusOptions] = useState([]);
+  const [applyTypeOptions, setApplyTypeOptions] = useState([]);
+
+  const [respTypeOptions, setRespTypeOptions] = useState([]);
 
   const access = useAccess();
 
@@ -139,84 +143,159 @@ const PostTableList = () => {
   const intl = useIntl();
 
   useEffect(() => {
-    getDict('sys_normal_disable').then((res) => {
+    getDict('sys_apply_type').then((res) => {
       if (res.code === 200) {
         const opts = {};
         res.data.forEach((item) => {
           opts[item.dictValue] = item.dictLabel;
         });
-        setStatusOptions(opts);
+        setApplyTypeOptions(opts);
+      }
+    });
+
+    getDict('sys_resp_type').then((res) => {
+      if (res.code === 200) {
+        const opts = {};
+        res.data.forEach((item) => {
+          opts[item.dictValue] = item.dictValue === "0" ? <Tag color="red">{item.dictLabel}</Tag> :<Tag color="green">{item.dictLabel}</Tag>;
+        });
+        setRespTypeOptions(opts);
       }
     });
   }, []);
 
+
+
   const columns = [
     {
-      title: "岗位名称",
-      dataIndex: 'postName',
+      title: "申请人",
+      dataIndex: 'studentName',
       valueType: 'text',
     },
     {
-      title: "公司名称",
-      dataIndex: 'companyName',
+      title: "学号",
+      dataIndex: 'studentId',
       valueType: 'text',
     },
     {
-      title: "部门名称",
-      dataIndex: 'depName',
+      title: "申请日期",
+      hideInSearch: true,
+      dataIndex: 'applyTime',
+      render:(_)=>{
+        let d = new Date(_-0);
+        return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()
+      }
+    },
+    {
+      title: "申请类型",
+      dataIndex: 'applyType',
+      valueType: 'select',
+      valueEnum: applyTypeOptions,
+    },
+    {
+      title: "详情",
+      dataIndex: 'applyDetail',
       valueType: 'text',
     },
     {
-      title: "联系电话",
-      dataIndex: 'phonenumber',
-      valueType: 'text',
+      title: "开始日期",
+      hideInSearch: true,
+      dataIndex: 'startTime',
+      render:(_)=>{
+        let d = new Date(_-0);
+        return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()
+      }
     },
+    {
+      title: "结束日期",
+      hideInSearch: true,
+      dataIndex: 'endTime',
+      render:(_)=>{
+        let d = new Date(_-0);
+        return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()
+      }
+    },
+
     {
       title: "状态",
       dataIndex: 'status',
       valueType: 'select',
-      valueEnum: statusOptions,
+      valueEnum: respTypeOptions,
     },
-    {
-      title: "薪酬",
-      dataIndex: 'salary',
-      valueType: 'text',
-    },
-    {
-      title: "工作时间",
-      dataIndex: 'workTime',
-      valueType: 'text',
-    },
-    {
-      title: "岗位要求",
-      dataIndex: 'requirement',
-      valueType: 'text',
-      width: '300px',
-    },
-    {
-      title: <FormattedMessage id="system.Post.remark" defaultMessage="备注" />,
-      dataIndex: 'remark',
-      valueType: 'textarea',
-      hideInSearch: true,
-    },
+
     {
       title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="操作" />,
       dataIndex: 'option',
       width: '220px',
       valueType: 'option',
       render: (_, record) => [
+        // <Button
+        //   type="link"
+        //   size="small"
+        //   key="edit"
+        //   hidden={!access.hasPerms('system:post:edit')}
+        //   onClick={() => {
+        //     setModalVisible(true);
+        //     setCurrentRow(record);
+        //   }}
+        // >
+        //   <FormattedMessage id="pages.searchTable.edit" defaultMessage="编辑" />
+        // </Button>,
+
         <Button
           type="link"
           size="small"
-          key="edit"
-          hidden={!access.hasPerms('system:post:edit')}
-          onClick={() => {
-            setModalVisible(true);
-            setCurrentRow(record);
+          key="batchRemove"
+          hidden={record.status!==0}
+          onClick={async () => {
+            console.log(record)
+            Modal.confirm({
+              title: '操作确认',
+              content: '确定批准该项吗？',
+              okText: '确认',
+              cancelText: '取消',
+              onOk: async () => {
+                const success = await handleUpdate({...record,status:1});
+                if (success) {
+                  if (actionRef.current) {
+                    actionRef.current.reload();
+                  }
+                }
+              },
+            });
           }}
         >
-          <FormattedMessage id="pages.searchTable.edit" defaultMessage="编辑" />
+          批准
         </Button>,
+
+
+        <Button
+          type="link"
+          size="small"
+          key="batchRemove"
+          hidden={record.status!==0}
+          onClick={async () => {
+            Modal.confirm({
+              title: '操作确认',
+              content: '确定拒绝该项吗？',
+              okText: '确认',
+              cancelText: '取消',
+              onOk: async () => {
+                const success = await handleUpdate({...record,status:2});
+                if (success) {
+                  if (actionRef.current) {
+                    actionRef.current.reload();
+                  }
+                }
+              },
+            });
+          }}
+        >
+          拒绝
+        </Button>,
+
+
+
         <Button
           type="link"
           size="small"
@@ -240,7 +319,7 @@ const PostTableList = () => {
             });
           }}
         >
-          <FormattedMessage id="pages.searchTable.delete" defaultMessage="删除" />
+          删除
         </Button>,
       ],
     },
@@ -250,7 +329,7 @@ const PostTableList = () => {
     <WrapContent>
       <div style={{ width: '100%', float: 'right' }}>
         <ProTable
-          headerTitle="岗位列表"
+          headerTitle="申请列表"
           actionRef={actionRef}
           formRef={formTableRef}
           rowKey="postId"
@@ -259,17 +338,6 @@ const PostTableList = () => {
             labelWidth: 120,
           }}
           toolBarRender={() => [
-            <Button
-              type="primary"
-              key="add"
-              hidden={!access.hasPerms('system:post:add')}
-              onClick={async () => {
-                setCurrentRow(undefined);
-                setModalVisible(true);
-              }}
-            >
-              <PlusOutlined /> 新建
-            </Button>,
             <Button
               type="primary"
               key="remove"
@@ -297,8 +365,8 @@ const PostTableList = () => {
               导出
             </Button>,
           ]}
-          request={(params) =>
-            getPostList(params).then((res) => {
+          request={() =>
+            getApplyList().then((res) => {
               return {
                 data: res.rows,
                 total: res.total,
@@ -347,31 +415,31 @@ const PostTableList = () => {
           </Button>
         </FooterToolbar>
       )}
-      <UpdateForm
-        onSubmit={async (values) => {
-          let success = false;
-          if (values.postId) {
-            success = await handleUpdate(values);
-          } else {
-            success = await handleAdd(values);
-          }
-          if (success) {
-            setModalVisible(false);
-            setCurrentRow(undefined);
-            if (actionRef.current) {
-              actionRef.current.reload();
-            }
-          }
-        }}
-        onCancel={() => {
-          setModalVisible(false);
-          setCurrentRow(undefined);
-        }}
-        visible={modalVisible}
-        //////////////////注意这一行////////////////////////////////////////////////
-        values={currentRow || {}}
-        statusOptions={statusOptions}
-      />
+      {/*<UpdateForm*/}
+      {/*  onSubmit={async (values) => {*/}
+      {/*    let success = false;*/}
+      {/*    if (values.postId) {*/}
+      {/*      success = await handleUpdate(values);*/}
+      {/*    } else {*/}
+      {/*      success = await handleAdd(values);*/}
+      {/*    }*/}
+      {/*    if (success) {*/}
+      {/*      setModalVisible(false);*/}
+      {/*      setCurrentRow(undefined);*/}
+      {/*      if (actionRef.current) {*/}
+      {/*        actionRef.current.reload();*/}
+      {/*      }*/}
+      {/*    }*/}
+      {/*  }}*/}
+      {/*  onCancel={() => {*/}
+      {/*    setModalVisible(false);*/}
+      {/*    setCurrentRow(undefined);*/}
+      {/*  }}*/}
+      {/*  visible={modalVisible}*/}
+      {/*  //////////////////注意这一行////////////////////////////////////////////////*/}
+      {/*  values={currentRow || {}}*/}
+      {/*  statusOptions={statusOptions}*/}
+      {/*/>*/}
     </WrapContent>
   );
 };

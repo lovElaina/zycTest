@@ -25,9 +25,4 @@ public class SysAttendServiceImpl implements ISysAttendService {
     public List<SysAttend> selectAttendList(SysAttend attend) {
         return attendMapper.selectAttendList(attend);
     }
-
-    @Override
-    public List<SysAttend> selectStudentList(SysAttend attend) {
-        return null;
-    }
 }

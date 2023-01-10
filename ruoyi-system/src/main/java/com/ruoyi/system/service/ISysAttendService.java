@@ -15,11 +15,5 @@ public interface ISysAttendService {
      */
     public List<SysAttend> selectAttendList(SysAttend attend);
 
-    /**
-     * 根据条件分页查询学生列表
-     *
-     * @param user 用户信息
-     * @return 用户信息集合信息
-     */
-    public List<SysAttend> selectStudentList(SysAttend attend);
+
 }

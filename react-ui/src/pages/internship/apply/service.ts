@@ -5,10 +5,8 @@ import request from '@/utils/request';
 
 // 查询岗位信息列表
 // @ts-ignore
-export async function getPostList (params?) {
-  const queryString = new URLSearchParams(params).toString();
-  return request(`/system/post/list?${queryString}`, {
-    data: params,
+export async function getApplyList () {
+  return request(`/internship/apply/list`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -16,27 +14,27 @@ export async function getPostList (params?) {
   });
 }
 
-// 查询岗位信息详细
-// @ts-ignore
-export function getPost (postId) {
-  return request(`/system/post/${postId}`, {
-    method: 'GET'
-  });
-}
-
-// 新增岗位信息
-// @ts-ignore
-export async function addPost (params) {
-  return request('/system/post', {
-    method: 'POST',
-    data: params
-  });
-}
+// // 查询岗位信息详细
+// // @ts-ignore
+// export function getPost (postId) {
+//   return request(`/system/post/${postId}`, {
+//     method: 'GET'
+//   });
+// }
+//
+// // 新增岗位信息
+// // @ts-ignore
+// export async function addPost (params) {
+//   return request('/system/post', {
+//     method: 'POST',
+//     data: params
+//   });
+// }
 
 // 修改岗位信息
 // @ts-ignore
 export async function updatePost (params) {
-  return request('/system/post', {
+  return request('/internship/apply', {
     method: 'PUT',
     data: params
   });
@@ -45,7 +43,7 @@ export async function updatePost (params) {
 // 删除岗位信息
 // @ts-ignore
 export async function removePost (ids) {
-  return request(`/system/post/${ids}`, {
+  return request(`/internship/apply/${ids}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
