@@ -440,7 +440,17 @@
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],
         KeepAlive: true,
-        title: '岗位管理'
+        title: '申请管理'
+      },
+      {
+        name: 'report',
+        icon: 'PartitionOutlined',
+        path: '/internship/report',
+        component: 'internship/report/index',
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        KeepAlive: true,
+        title: '报告管理'
       },
     ],
 

@@ -72,8 +72,8 @@ const UserForm: React.FC<UserFormProps> = (props) => {
       updateBy: props.values.updateBy,
       updateTime: props.values.updateTime,
       remark: props.values.remark,
-      tutorId:props.values.tutorId+"",
-      dateRange:[props.values.startTime-0, props.values.endTime-0],
+      tutorId:props.values.tutorId ? props.values.tutorId+"" : null,
+      dateRange:props.values.startTime ? [props.values.startTime-0, props.values.endTime-0]:[Date.now(), Date.now()],
     });
   }, [form, props]);
 
@@ -194,7 +194,7 @@ const UserForm: React.FC<UserFormProps> = (props) => {
               placeholder="请输入手机号码"
               rules={[
                 {
-                  required: false,
+                  required: true,
                   message: (
                     <FormattedMessage id="请输入手机号码！" defaultMessage="请输入手机号码！" />
                   ),
@@ -213,7 +213,7 @@ const UserForm: React.FC<UserFormProps> = (props) => {
               placeholder="请输入用户邮箱"
               rules={[
                 {
-                  required: false,
+                  required: true,
                   message: (
                     <FormattedMessage id="请输入用户邮箱！" defaultMessage="请输入用户邮箱！" />
                   ),
@@ -255,7 +255,7 @@ const UserForm: React.FC<UserFormProps> = (props) => {
               placeholder="请输入密码"
               rules={[
                 {
-                  required: false,
+                  required: true,
                   message: <FormattedMessage id="请输入密码！" defaultMessage="请输入密码！" />,
                 },
               ]}
@@ -275,7 +275,7 @@ const UserForm: React.FC<UserFormProps> = (props) => {
               placeholder="请输入用户性别"
               rules={[
                 {
-                  required: false,
+                  required: true,
                   message: (
                     <FormattedMessage id="请输入用户性别！" defaultMessage="请输入用户性别！" />
                   ),
@@ -371,7 +371,7 @@ const UserForm: React.FC<UserFormProps> = (props) => {
                 label="岗位"
                 options={posts}
                 placeholder="请选择岗位"
-                rules={[{ required: true, message: '请选择岗位!' }]}
+                rules={[{ required: false, message: '请选择岗位!' }]}
               />
             </Col>
           </Row>
