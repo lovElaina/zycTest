@@ -312,7 +312,7 @@ const PostTableList = () => {
     <WrapContent>
       <div style={{ width: '100%', float: 'right' }}>
         <ProTable
-          headerTitle="考勤管理"
+          headerTitle="报告管理"
           actionRef={actionRef}
           formRef={formTableRef}
           rowKey="postId"

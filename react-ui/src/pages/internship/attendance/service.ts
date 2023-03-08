@@ -3,7 +3,7 @@ import request from '@/utils/request';
 //import type { PostType, PostListParams } from './data.d';
 
 
-// 查询岗位信息列表
+// 查询出勤信息列表
 // @ts-ignore
 export async function getAttendList () {
   //const queryString = new URLSearchParams(params).toString();
@@ -16,7 +16,7 @@ export async function getAttendList () {
   });
 }
 
-// 查询岗位信息详细
+// 查询出勤信息详细
 // @ts-ignore
 export function getPost (postId) {
   return request(`/system/post/${postId}`, {
@@ -24,7 +24,7 @@ export function getPost (postId) {
   });
 }
 
-// 新增岗位信息
+// 新增出勤信息
 // @ts-ignore
 export async function addPost (params) {
   return request('/system/post', {
@@ -33,7 +33,7 @@ export async function addPost (params) {
   });
 }
 
-// 修改岗位信息
+// 修改出勤信息
 // @ts-ignore
 export async function updatePost (params) {
   return request('/system/post', {
@@ -42,7 +42,7 @@ export async function updatePost (params) {
   });
 }
 
-// 删除岗位信息
+// 删除出勤信息
 // @ts-ignore
 export async function removePost (ids) {
   return request(`/system/post/${ids}`, {
@@ -53,7 +53,7 @@ export async function removePost (ids) {
   });
 }
 
-// 导出岗位信息
+// 导出出勤信息
 // @ts-ignore
 export function exportPost (params) {
   return downLoadXlsx(`/system/post/export`, { params }, `post_${new Date().getTime()}.xlsx`);

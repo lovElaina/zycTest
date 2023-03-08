@@ -3,7 +3,7 @@ import request from '@/utils/request';
 //import type { PostType, PostListParams } from './data.d';
 
 
-// 查询岗位信息列表
+// 查询申请信息列表
 // @ts-ignore
 export async function getApplyList () {
   return request(`/internship/apply/list`, {
@@ -14,24 +14,7 @@ export async function getApplyList () {
   });
 }
 
-// // 查询岗位信息详细
-// // @ts-ignore
-// export function getPost (postId) {
-//   return request(`/system/post/${postId}`, {
-//     method: 'GET'
-//   });
-// }
-//
-// // 新增岗位信息
-// // @ts-ignore
-// export async function addPost (params) {
-//   return request('/system/post', {
-//     method: 'POST',
-//     data: params
-//   });
-// }
-
-// 修改岗位信息
+// 修改申请信息
 // @ts-ignore
 export async function updatePost (params) {
   return request('/internship/apply', {
@@ -40,7 +23,7 @@ export async function updatePost (params) {
   });
 }
 
-// 删除岗位信息
+// 删除删除信息
 // @ts-ignore
 export async function removePost (ids) {
   return request(`/internship/apply/${ids}`, {

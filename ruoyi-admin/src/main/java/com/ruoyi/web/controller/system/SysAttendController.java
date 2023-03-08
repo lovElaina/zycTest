@@ -17,6 +17,7 @@ public class SysAttendController extends BaseController {
     @Autowired
     private ISysAttendService attendService;
 
+
     @GetMapping("/list")
     public TableDataInfo list(SysAttend attend)
     {

@@ -3,7 +3,7 @@ import request from '@/utils/request';
 import type { DeptType, DeptListParams } from './data';
 
 
-// 查询部门列表
+// 查询组织列表
 export async function getDeptList(params?: DeptListParams) {
   const queryString = new URLSearchParams(params).toString();
   return request(`/system/dept/list?${queryString}`, {
