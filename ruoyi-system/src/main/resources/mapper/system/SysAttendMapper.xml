@@ -9,6 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="userId"	column="user_id"   />
         <result property="totalDay"       column="total_day"      />
         <result property="attendDay"     column="attend_day"    />
+        <result property="actualDay"     column="actual_day"    />
         <result property="leaveDay"     column="leave_day"    />
         <result property="absentDay"        column="absent_day"        />
         <result property="lateDay"     column="late_day"    />
@@ -55,7 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
     <select id="selectAttendList" parameterType="SysAttend" resultMap="SysAttendResult">
-        select a.attend_id, a.user_id, a.total_day, a.attend_day, a.leave_day, a.absent_day, a.late_day, a.del_flag, a.create_by, a.create_time, a.update_by, a.update_time, a.remark, a.status,
+        select a.attend_id, a.user_id, a.total_day ,a.actual_day, a.attend_day, a.leave_day, a.absent_day, a.late_day, a.del_flag, a.create_by, a.create_time, a.update_by, a.update_time, a.remark, a.status,
         u.user_id, u.student_id, u.dept_id, u.user_name, u.nick_name, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.status, u.internship_status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, u.tutor_id, u.start_time, u.end_time
         from sys_attend a
         left join sys_user u on a.user_id = u.user_id
@@ -78,6 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="attendId != null and attendId != 0">attend_id,</if>
         <if test="userId != null and userId != 0">user_id,</if>
         <if test="totalDay != null and totalDay != 0">total_day,</if>
+        <if test="actualDay != null and actualDay != 0">actual_day,</if>
         <if test="attendDay != null and attendDay != ''">attend_day,</if>
         <if test="leaveDay != null and leaveDay != ''">leave_day,</if>
         <if test="absentDay != null and absentDay != ''">absent_Day,</if>
@@ -90,6 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="attendId != null and attendId != ''">#{attendId},</if>
         <if test="userId != null and userId != ''">#{userId},</if>
         <if test="totalDay != null and totalDay != ''">#{totalDay},</if>
+        <if test="actualDay != null and actualDay != ''">#{actualDay},</if>
         <if test="attendDay != null and attendDay != ''">#{attendDay},</if>
         <if test="leaveDay != null and leaveDay != ''">#{leaveDay},</if>
         <if test="absentDay != null and absentDay != ''">#{absentDay},</if>
@@ -105,6 +108,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update sys_attend set del_flag = '2' where user_id = #{userId}
     </delete>
 
+
+
+    <update id="updateAttend" parameterType="SysAttend">
+        update sys_attend
+        <set>
+            <if test="totalDay != null and totalDay != 0">total_day = #{totalDay},</if>
+            <if test="attendDay != null and attendDay != ''">attend_day = #{attendDay},</if>
+            <if test="actualDay != null and actualDay != ''">attend_day = #{actualDay},</if>
+            <if test="leaveDay != null and leaveDay != ''">leave_day = #{leaveDay},</if>
+            <if test="absentDay != null and absentDay != ''">absent_Day = #{absentDay},</if>
+            <if test="lateDay != null and lateDay != ''">late_day = #{lateDay},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="createBy != null and createBy != ''">create_by = #{createBy},</if>
+            <if test="remark != null and remark != ''">remark = #{remark},</if>
+        </set>
+            where user_id = #{userId}
+    </update>
 
 
 </mapper>

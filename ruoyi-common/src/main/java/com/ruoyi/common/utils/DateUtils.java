@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Calendar;
 import java.util.Date;
 import org.apache.commons.lang3.time.DateFormatUtils;
 
@@ -183,5 +184,34 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils
         LocalDateTime localDateTime = LocalDateTime.of(temporalAccessor, LocalTime.of(0, 0, 0));
         ZonedDateTime zdt = localDateTime.atZone(ZoneId.systemDefault());
         return Date.from(zdt.toInstant());
+    }
+
+    /**
+     * 计算两个日期之间的工作日天数
+     *
+     * @param startDate 开始日期
+     * @param endDate   结束日期
+     * @return 工作日天数
+     */
+    public static int countWorkingDays(Date startDate, Date endDate) {
+        Calendar startCal = Calendar.getInstance();
+        startCal.setTime(startDate);
+
+        Calendar endCal = Calendar.getInstance();
+        endCal.setTime(endDate);
+
+        int workingDays = 0;
+        while (startCal.before(endCal)) {
+            // 判断是否为工作日
+            int dayOfWeek = startCal.get(Calendar.DAY_OF_WEEK);
+            System.out.println(dayOfWeek);
+            if (dayOfWeek != Calendar.SATURDAY && dayOfWeek != Calendar.SUNDAY) {
+                workingDays++;
+            }
+            // 日期加1
+            startCal.add(Calendar.DATE, 1);
+        }
+
+        return workingDays;
     }
 }

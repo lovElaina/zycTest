@@ -3,7 +3,7 @@ import { Form, message } from 'antd';
 import { FormattedMessage } from 'react-intl';
 import ProForm, { ProFormText } from '@ant-design/pro-form';
 import { useIntl } from 'umi';
-import { updateUserPwd } from '@/pages/internship/user/service';
+import { updateUserPwd } from '@/pages/users/student/service';
 
 const ResetPassword: React.FC = () => {
   const [form] = Form.useForm();

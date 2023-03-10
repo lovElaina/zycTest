@@ -3,7 +3,7 @@ import { Form, message, Row } from 'antd';
 import { FormattedMessage } from 'react-intl';
 import ProForm, { ProFormRadio, ProFormText } from '@ant-design/pro-form';
 import { useIntl } from 'umi';
-import { updateUserProfile } from '@/pages/internship/user/service';
+import { updateUserProfile } from '@/pages/users/student/service';
 
 export type BaseInfoProps = {
   values: Partial<API.CurrentUser> | undefined;

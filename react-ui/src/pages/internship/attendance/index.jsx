@@ -15,51 +15,51 @@ import {ModalForm, ProFormText} from "@ant-design/pro-components";
 import moment from "moment";
 
 
-/**
- * 添加节点
- *
- * @param fields
- */
-const handleAdd = async (fields) => {
-  const hide = message.loading('正在添加');
-  try {
-    const resp = await addPost({ ...fields });
-    hide();
-    if(resp.code === 200) {
-      message.success('添加成功');
-    } else {
-      message.error(resp.msg);
-    }
-    return true;
-  } catch (error) {
-    hide();
-    message.error('添加失败请重试！');
-    return false;
-  }
-};
-
-/**
- * 更新节点
- *
- * @param fields
- */
-const handleUpdate = async (fields) => {
-  const hide = message.loading('正在配置');
-  try {
-    const resp = await updatePost(fields);
-    hide();
-    if(resp.code === 200) {
-      message.success('配置成功');
-    } else {
-      message.error(resp.msg);
-    }
-    return true;
-  } catch (error) {
-    hide();
-    message.error('配置失败请重试！');
-    return false;
-  }
-};
+// /**
+//  * 添加节点
+//  *
+//  * @param fields
+//  */
+// const handleAdd = async (fields) => {
+//   const hide = message.loading('正在添加');
+//   try {
+//     const resp = await addPost({ ...fields });
+//     hide();
+//     if(resp.code === 200) {
+//       message.success('添加成功');
+//     } else {
+//       message.error(resp.msg);
+//     }
+//     return true;
+//   } catch (error) {
+//     hide();
+//     message.error('添加失败请重试！');
+//     return false;
+//   }
+// };
+//
+// /**
+//  * 更新节点
+//  *
+//  * @param fields
+//  */
+// const handleUpdate = async (fields) => {
+//   const hide = message.loading('正在配置');
+//   try {
+//     const resp = await updatePost(fields);
+//     hide();
+//     if(resp.code === 200) {
+//       message.success('配置成功');
+//     } else {
+//       message.error(resp.msg);
+//     }
+//     return true;
+//   } catch (error) {
+//     hide();
+//     message.error('配置失败请重试！');
+//     return false;
+//   }
+// };
 
 /**
  * 删除节点
@@ -209,6 +209,12 @@ const PostTableList = () => {
       }
     },
     {
+      title: "已过天数",
+      hideInSearch: true,
+      dataIndex: 'actualDay',
+      valueType: 'text',
+    },
+    {
       title: "出勤天数",
       hideInSearch: true,
       dataIndex: 'attendDay',
@@ -282,6 +288,7 @@ const PostTableList = () => {
           key="edit"
           //hidden={!access.hasPerms('system:post:edit')}
           onClick={() => {
+            console.log(record)
             setModalVisible(true);
             setCurrentRow(record);
           }}
@@ -369,7 +376,7 @@ const PostTableList = () => {
             </Button>,
           ]}
           request={(params) =>
-            getAttendList().then((res) => {
+            getAttendList(params).then((res) => {
               return {
                 data: res.rows,
                 total: res.total,
@@ -420,20 +427,11 @@ const PostTableList = () => {
       )}
       <UpdateForm
         onSubmit={async (values) => {
-          let success = false;
-          if (values.postId) {
-            success = await handleUpdate(values);
-          } else {
-            success = await handleAdd(values);
-          }
-          if (success) {
-            setModalVisible(false);
-            setCurrentRow(undefined);
             if (actionRef.current) {
               actionRef.current.reload();
             }
           }
-        }}
+        }
         onCancel={() => {
           setModalVisible(false);
           setCurrentRow(undefined);
@@ -441,7 +439,8 @@ const PostTableList = () => {
         visible={modalVisible}
         //////////////////注意这一行////////////////////////////////////////////////
         values={currentRow || {}}
-        statusOptions={statusOptions}
+        //statusOptions={statusOptions}
+
 
       />
 

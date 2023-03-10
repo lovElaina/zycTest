@@ -372,6 +372,50 @@
     ],
   },
 
+
+  {
+    name: 'users',
+    icon: 'BugOutlined',
+    path: '/users',
+    component: '@/layouts/TabsLayout',
+    routes: [
+      {
+        path: '/',
+        redirect: '/users/company'
+      },
+      {
+        name: 'student',
+        icon: 'PartitionOutlined',
+        path: '/users/student',
+        component: 'users/student/index',
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        KeepAlive: true,
+        title: '学生管理'
+      },
+      {
+        name: 'tutor',
+        icon: 'PartitionOutlined',
+        path: '/users/tutor',
+        component: 'users/tutor/index',
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        KeepAlive: true,
+        title: '导师管理'
+      },
+      {
+        name: 'company',
+        icon: 'PartitionOutlined',
+        path: '/users/company',
+        component: 'users/company/index',
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        KeepAlive: true,
+        title: '企业管理'
+      },
+    ]
+  },
+
   {
     name: 'internship',
     icon: 'BugOutlined',
@@ -382,26 +426,29 @@
         path: '/',
         redirect: '/internship/user',
       },
-      {
-        name: 'tutor',
-        icon: 'PartitionOutlined',
-        path: '/internship/tutor',
-        component: 'internship/tutor/index',
-        access: 'authorize',
-        wrappers: ['@/components/KeepAlive'],
-        KeepAlive: true,
-        title: '导师管理'
-      },
-      {
-        name: 'user',
-        icon: 'PartitionOutlined',
-        path: '/internship/user',
-        component: 'internship/user/index',
-        access: 'authorize',
-        wrappers: ['@/components/KeepAlive'],
-        KeepAlive: true,
-        title: 'menu.title.user'
-      },
+      // {
+      //   name: 'tutor',
+      //   icon: 'PartitionOutlined',
+      //   path: '/internship/tutor',
+      //   component: 'internship/tutor/index',
+      //   access: 'authorize',
+      //   wrappers: ['@/components/KeepAlive'],
+      //   KeepAlive: true,
+      //   title: '导师管理'
+      // },
+
+
+
+      // {
+      //   name: 'user',
+      //   icon: 'PartitionOutlined',
+      //   path: '/internship/user',
+      //   component: 'internship/user/index',
+      //   access: 'authorize',
+      //   wrappers: ['@/components/KeepAlive'],
+      //   KeepAlive: true,
+      //   title: 'menu.title.user'
+      // },
       {
         name: 'dept',
         icon: 'PartitionOutlined',

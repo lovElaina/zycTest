@@ -8,7 +8,7 @@ import {
 } from '@ant-design/pro-form';
 import { Form, Modal, Row, Col } from 'antd';
 import { useIntl, FormattedMessage } from 'umi';
-import type { TutorType } from '../data.d';
+import type { TutorType } from '../data';
 import {DataNode} from "antd/lib/tree";
 
 

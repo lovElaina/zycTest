@@ -7,7 +7,7 @@ import { FooterToolbar } from '@ant-design/pro-layout';
 import WrapContent from '@/components/WrapContent';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
-import type { TutorType, TutorListParams } from './data.d';
+import type { TutorType, TutorListParams } from './data';
 import {getTutorList, getTutor, updateTutorPwd, updateTutor, exportTutor, removeTutor, getDeptTree, addTutor} from './service';
 import UpdateForm from './components/edit';
 import { getDict } from '../../system/dict/service';
@@ -15,7 +15,7 @@ import {DataNode} from "antd/lib/tree";
 import {getPostList} from "@/pages/internship/post/service";
 import {getRoleList} from "@/pages/system/role/service";
 
-import ResetPwd from "@/pages/internship/user/components/ResetPwd";
+import ResetPwd from "@/pages/users/student/components/ResetPwd";
 
 /**
  * 添加节点

@@ -3,7 +3,7 @@ import { Modal, Row, Col, Button, Space, Upload, message } from 'antd';
 import { useIntl } from 'umi';
 import 'cropperjs/dist/cropper.css';
 import { Cropper } from 'react-cropper';
-import { uploadAvatar } from '@/pages/internship/user/service';
+import { uploadAvatar } from '@/pages/users/student/service';
 import styles from './index.less';
 import {
   MinusOutlined,

@@ -1,44 +1,33 @@
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import type { FormInstance } from 'antd';
-import { Button, message, Modal, Row, Col } from 'antd';
+import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
 import { useIntl, FormattedMessage, useAccess } from 'umi';
 import { FooterToolbar } from '@ant-design/pro-layout';
+import WrapContent from '@/components/WrapContent';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
-import WrapContent from '@/components/WrapContent';
-import Card from 'antd/es/card';
-import type { UserType, UserListParams } from './data';
-import {
-  getUserList,
-  getUser,
-  removeUser,
-  addUser,
-  updateUser,
-  exportUser,
-  updateUserPwd,
-  getDeptTree, getTutorList,
-} from './service';
+import type { TutorType, TutorListParams } from './data';
+import {getTutorList, getTutor, updateTutorPwd, updateTutor, exportTutor, removeTutor, getDeptTree, addTutor} from './service';
 import UpdateForm from './components/edit';
 import { getDict } from '../../system/dict/service';
-import ResetPwd from './components/ResetPwd';
-import DeptTree from './components/DeptTree';
-import type { DataNode } from 'antd/lib/tree';
-import { getPostList } from '../../internship/post/service';
-import { getRoleList } from '../../system/role/service';
+import {DataNode} from "antd/lib/tree";
+import {getPostList} from "@/pages/internship/post/service";
+import {getRoleList} from "@/pages/system/role/service";
 
+import ResetPwd from "@/pages/users/student/components/ResetPwd";
 
 /**
  * 添加节点
  *
  * @param fields
  */
-const handleAdd = async (fields: UserType) => {
+const handleAdd = async (fields: TutorType) => {
   const hide = message.loading('正在添加');
   try {
-    const resp = await addUser({ ...fields });
+    const resp = await addTutor({ ...fields });
     hide();
-    if (resp.code === 200) {
+    if(resp.code === 200) {
       message.success('添加成功');
     } else {
       message.error(resp.msg);
@@ -56,12 +45,12 @@ const handleAdd = async (fields: UserType) => {
  *
  * @param fields
  */
-const handleUpdate = async (fields: UserType) => {
+const handleUpdate = async (fields: TutorType) => {
   const hide = message.loading('正在配置');
   try {
-    const resp = await updateUser(fields);
+    const resp = await updateTutor(fields);
     hide();
-    if (resp.code === 200) {
+    if(resp.code === 200) {
       message.success('配置成功');
     } else {
       message.error(resp.msg);
@@ -79,13 +68,13 @@ const handleUpdate = async (fields: UserType) => {
  *
  * @param selectedRows
  */
-const handleRemove = async (selectedRows: UserType[]) => {
+const handleRemove = async (selectedRows: TutorType[]) => {
   const hide = message.loading('正在删除');
   if (!selectedRows) return true;
   try {
-    const resp = await removeUser(selectedRows.map((row) => row.userId).join(','));
+    const resp = await removeTutor(selectedRows.map((row) => row.userId).join(','));
     hide();
-    if (resp.code === 200) {
+    if(resp.code === 200) {
       message.success('删除成功，即将刷新');
     } else {
       message.error(resp.msg);
@@ -98,14 +87,14 @@ const handleRemove = async (selectedRows: UserType[]) => {
   }
 };
 
-const handleRemoveOne = async (selectedRow: UserType) => {
+const handleRemoveOne = async (selectedRow: TutorType) => {
   const hide = message.loading('正在删除');
   if (!selectedRow) return true;
   try {
     const params = [selectedRow.userId];
-    const resp = await removeUser(params.join(','));
+    const resp = await removeTutor(params.join(','));
     hide();
-    if (resp.code === 200) {
+    if(resp.code === 200) {
       message.success('删除成功，即将刷新');
     } else {
       message.error(resp.msg);
@@ -126,7 +115,7 @@ const handleRemoveOne = async (selectedRow: UserType) => {
 const handleExport = async () => {
   const hide = message.loading('正在导出');
   try {
-    await exportUser();
+    await exportTutor();
     hide();
     message.success('导出成功');
     return true;
@@ -137,62 +126,42 @@ const handleExport = async () => {
   }
 };
 
-const UserTableList: React.FC = () => {
+const TutorTableList: React.FC = () => {
   const formTableRef = useRef<FormInstance>();
 
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [resetPwdModalVisible, setResetPwdModalVisible] = useState<boolean>(false);
 
   const actionRef = useRef<ActionType>();
-  const [currentRow, setCurrentRow] = useState<UserType>();
-  const [selectedRowsState, setSelectedRows] = useState<UserType[]>([]);
+  const [currentRow, setCurrentRow] = useState<TutorType>();
+  const [selectedRowsState, setSelectedRows] = useState<TutorType[]>([]);
 
-  const [selectDept, setSelectDept] = useState<any>({ id: 0 });
+  //const [selectDept, setSelectDept] = useState<any>({ id: 0 });
 
   //字典配置
   const [sexOptions, setSexOptions] = useState<any>([]);
   const [statusOptions, setStatusOptions] = useState<any>([]);
   const [internshipStatusOptions, setInternshipStatusOptions] = useState<any>([]);
-  const [tutorOptions, setTutorOptions] = useState<any>([]);
 
   const [postIds, setPostIds] = useState<string[]>();
   const [postList, setPostList] = useState<string[]>();
   const [roleIds, setRoleIds] = useState<string[]>();
   const [roleList, setRoleList] = useState<string[]>();
-
-  //const [tutorIds, setTutorIds] = useState<string[]>();
-
-
   const [deptTree, setDeptTree] = useState<DataNode[]>();
-
-
 
   const access = useAccess();
 
   /** 国际化配置 */
   const intl = useIntl();
 
+  //设置状态
   useEffect(() => {
-    getTutorList().then((res) => {
-      console.log(res.rows)
-      if(res.code === 200){
-        const opts = {};
-        res.rows.forEach((item:any) => {
-          opts[item.userId] = item.nickName;
-        })
-        console.log(opts);
-        setTutorOptions(opts);
-      }
-    })
-
-
     getDict('sys_user_sex').then((res) => {
       if (res.code === 200) {
         const opts = {};
         res.data.forEach((item: any) => {
           opts[item.dictValue] = item.dictLabel;
         });
-        console.log(opts);
         setSexOptions(opts);
       }
     });
@@ -208,7 +177,7 @@ const UserTableList: React.FC = () => {
       }
     });
 
-    getDict('sys_user_internship').then((res) => {
+    getDict('sys_tutor_type').then((res) => {
       if (res.code === 200) {
         console.log(res)
         const opts = {};
@@ -220,62 +189,68 @@ const UserTableList: React.FC = () => {
     });
   }, []);
 
-  const columns: ProColumns<UserType>[] = [
+  const columns: ProColumns<TutorType>[] = [
     {
-      title: '学号',
+      title: '工号',
       dataIndex: 'studentId',
-      valueType: 'textarea',
-      hideInSearch: true,
+      valueType: 'text',
+      width:'140px'
     },
     {
-      title: <FormattedMessage id="system.User.dept_id" defaultMessage="系别" />,
+      title: '院系',
       dataIndex: ['dept','deptName'],
       valueType: 'text',
+      width:'140px'
     },
     {
-      title: <FormattedMessage id="system.User.nick_name" defaultMessage="姓名" />,
+      title: '姓名',
       dataIndex: 'nickName',
       valueType: 'text',
-      width: '120px',
-      hideInSearch: true,
     },
     {
-      title: "导师",
-      dataIndex: 'tutorId',
+      title: '性别',
+      dataIndex: 'sex',
       valueType: 'select',
-      valueEnum: tutorOptions,
-      width: '120px',
+      valueEnum: sexOptions,
     },
     {
-      title: "账号",
-      dataIndex: 'userName',
-      valueType: 'text',
-      width: '120px',
-    },
-    {
-      title: "邮箱",
-      dataIndex: 'email',
-      valueType: 'text',
-    },
-    {
-      title: <FormattedMessage id="system.User.phonenumber" defaultMessage="手机号码" />,
-      dataIndex: 'phonenumber',
-      valueType: 'text',
-    },
-    {
-      title: "实习情况",
+      title: '类型',
       dataIndex: 'internshipStatus',
       valueType: 'select',
       valueEnum: internshipStatusOptions,
     },
-    // {
-    //   title: <FormattedMessage id="system.User.status" defaultMessage="账号状态" />,
-    //   dataIndex: 'status',
-    //   valueType: 'select',
-    //   valueEnum: statusOptions,
-    // },
     {
-      title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="操作" />,
+      title: '研究方向',
+      dataIndex: 'remark',
+      valueType: 'textarea',
+      hideInSearch: true,
+      width:'200px'
+    },
+    {
+      title: '账号',
+      dataIndex: 'userName',
+      valueType: 'text',
+    },
+    {
+      title: '邮箱',
+      dataIndex: 'email',
+      valueType: 'text',
+      width: '150px',
+    },
+    {
+      title: '手机号码',
+      dataIndex: 'phonenumber',
+      valueType: 'text',
+      width: '150px',
+    },
+    {
+      title: '账号状态',
+      dataIndex: 'status',
+      valueType: 'select',
+      valueEnum: statusOptions,
+    },
+    {
+      title: '操作',
       dataIndex: 'option',
       width: '220px',
       valueType: 'option',
@@ -287,16 +262,13 @@ const UserTableList: React.FC = () => {
           hidden={!access.hasPerms('system:user:edit')}
           onClick={() => {
             const fetchUserInfo = async (userId: number) => {
-              const res = await getUser(userId);
-
-
-
+              const res = await getTutor(userId);
               setPostIds(res.postIds);
               setPostList(
                 res.posts.map((item: any) => {
                   return {
                     value: item.postId,
-                    label: item.companyName+ " - "+ item.postName,
+                    label: item.postName,
                   };
                 }),
               );
@@ -346,6 +318,7 @@ const UserTableList: React.FC = () => {
         >
           <FormattedMessage id="pages.searchTable.delete" defaultMessage="删除" />
         </Button>,
+
         <Button
           type="link"
           size="small"
@@ -364,129 +337,111 @@ const UserTableList: React.FC = () => {
 
   return (
     <WrapContent>
-      <Row gutter={[16, 24]}>
-        <Col lg={6} md={24}>
-          <Card>
-            <DeptTree
-              onSelect={async (value: any) => {
-                setSelectDept(value);
-                if (actionRef.current) {
-                  formTableRef?.current?.submit();
+      <div style={{ width: '100%', float: 'right' }}>
+        <ProTable<TutorType>
+          headerTitle="导师列表"
+          actionRef={actionRef}
+          formRef={formTableRef}
+          rowKey="userId"
+          key="tutorList"
+          search={{
+            labelWidth: 120,
+          }}
+
+          //////////////////////////////////紫色按钮//////////////////////////////////////
+          toolBarRender={() => [
+            <Button
+              type="primary"
+              key="add"
+              hidden={!access.hasPerms('system:user:add')}
+              onClick={async () => {
+                getDeptTree({}).then((treeData) => {
+                  setDeptTree(treeData);
+                  setCurrentRow(undefined);
+                  setModalVisible(true);
+                });
+                getPostList().then((res) => {
+                  if (res.code === 200) {
+                    setPostList(
+                      res.rows.map((item: any) => {
+                        return {
+                          value: item.postId,
+                          label: item.postName,
+                        };
+                      }),
+                    );
+                  }
+                });
+                getRoleList().then((res) => {
+                  if (res.code === 200) {
+                    setRoleList(
+                      res.rows.map((item: any) => {
+                        return {
+                          value: item.roleId,
+                          label: item.roleName,
+                        };
+                      }),
+                    );
+                  }
+                });
+              }}
+            >
+              <PlusOutlined />{' '}
+              <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
+            </Button>,
+
+
+
+            <Button
+              type="primary"
+              key="remove"
+              hidden={selectedRowsState?.length === 0 || !access.hasPerms('system:user:remove')}
+              onClick={async () => {
+                const success = await handleRemove(selectedRowsState);
+                if (success) {
+                  setSelectedRows([]);
+                  actionRef.current?.reloadAndRest?.();
                 }
               }}
-            />
-          </Card>
-        </Col>
-        <Col lg={18} md={24}>
-          <ProTable<UserType>
-            headerTitle="学生列表"
-            actionRef={actionRef}
-            formRef={formTableRef}
-            rowKey="userId"
-            key="userList"
-            search={{
-              labelWidth: 120,
-            }}
-            toolBarRender={() => [
-              <Button
-                type="primary"
-                key="add"
-                hidden={!access.hasPerms('system:user:add')}
-                onClick={async () => {
-                  if (selectDept.id === '' || selectDept.id == null) {
-                    message.warning('请选择左侧父级节点');
-                  } else {
-                    getDeptTree({}).then((treeData) => {
-                      setDeptTree(treeData);
-                      setCurrentRow(undefined);
-                      setModalVisible(true);
-                    });
-                    getPostList().then((res) => {
-                      if (res.code === 200) {
-                        setPostList(
-                          res.rows.map((item: any) => {
-                            return {
-                              value: item.postId,
-                              label: item.companyName+ " - "+ item.postName,
-                            };
-                          }),
-                        );
-                      }
-                    });
-                    getRoleList().then((res) => {
-                      if (res.code === 200) {
-                        setRoleList(
-                          res.rows.map((item: any) => {
-                            return {
-                              value: item.roleId,
-                              label: item.roleName,
-                            };
-                          }),
-                        );
-                      }
-                    });
-                  }
-                }}
-              >
-                <PlusOutlined />{' '}
-                <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
-              </Button>,
+            >
+              <DeleteOutlined />
+              <FormattedMessage id="pages.searchTable.delete" defaultMessage="删除" />
+            </Button>,
+            <Button
+              type="primary"
+              key="export"
+              hidden={!access.hasPerms('system:user:export')}
+              onClick={async () => {
+                handleExport();
+              }}
+            >
+              <PlusOutlined />
+              <FormattedMessage id="pages.searchTable.export" defaultMessage="导出" />
+            </Button>,
+          ]}
+          ///////////////////////////////////////////////////////////////////////////////
 
 
+          request={(params) =>
+            getTutorList({ ...params } as TutorListParams).then((res) => {
+              return {
+                data: res.rows,
+                total: res.total,
+                success: true,
+              };
+            })
+          }
+          columns={columns}
+          rowSelection={{
+            onChange: (_, selectedRows) => {
+              setSelectedRows(selectedRows);
+            },
+          }}
+        />
+      </div>
 
 
-              <Button
-                type="primary"
-                key="remove"
-                hidden={selectedRowsState?.length === 0 || !access.hasPerms('system:user:remove')}
-                onClick={async () => {
-                  const success = await handleRemove(selectedRowsState);
-                  if (success) {
-                    setSelectedRows([]);
-                    actionRef.current?.reloadAndRest?.();
-                  }
-                }}
-              >
-                <DeleteOutlined />
-                <FormattedMessage id="pages.searchTable.delete" defaultMessage="删除" />
-              </Button>,
-
-
-
-
-
-              <Button
-                type="primary"
-                key="export"
-                hidden={!access.hasPerms('system:user:export')}
-                onClick={async () => {
-                  handleExport();
-                }}
-              >
-                <PlusOutlined />
-                <FormattedMessage id="pages.searchTable.export" defaultMessage="导出" />
-              </Button>,
-            ]}
-            request={(params) =>
-              getUserList({ ...params, deptId: selectDept.id } as UserListParams).then((res) => {
-                return {
-                  data: res.rows,
-                  total: res.total,
-                  success: true,
-                };
-              })
-            }
-            columns={columns}
-            rowSelection={{
-              onChange: (_, selectedRows) => {
-                setSelectedRows(selectedRows);
-              },
-            }}
-          />
-        </Col>
-      </Row>
-
-
+      {/*///////////////////////////////////批量删除////////////////////////////////////////*/}
       {selectedRowsState?.length > 0 && (
         <FooterToolbar
           extra={
@@ -520,19 +475,18 @@ const UserTableList: React.FC = () => {
           </Button>
         </FooterToolbar>
       )}
+      {/*////////////////////////////////////////////////////////////////////////////////////////*/}
+
       <UpdateForm
         onSubmit={async (values) => {
           let success = false;
-          values.roleIds = [4];
-          values.postIds = values.postIds instanceof Array ? values.postIds : [values.postIds];
+          values.roleIds = [3];
           values.userId = currentRow?.userId;
-          values.startTime = Date.parse(values.dateRange[0]);
-          values.endTime = Date.parse(values.dateRange[1]);
 
           if (values.userId) {
-            success = await handleUpdate({ ...values } as UserType);
+            success = await handleUpdate({ ...values } as TutorType);
           } else {
-            success = await handleAdd({ ...values } as UserType);
+            success = await handleAdd({ ...values } as TutorType);
           }
           if (success) {
             setModalVisible(false);
@@ -556,12 +510,11 @@ const UserTableList: React.FC = () => {
         roleIds={roleIds || []}
         depts={deptTree || []}
         internshipStatusOptions={internshipStatusOptions}
-        tutorOptions={tutorOptions}
       />
 
       <ResetPwd
         onSubmit={async (value: any) => {
-          const success = await updateUserPwd(value.oldPassword, value.newPassword);
+          const success = await updateTutorPwd(value.oldPassword, value.newPassword);
           if (success) {
             setResetPwdModalVisible(false);
             setSelectedRows([]);
@@ -581,4 +534,4 @@ const UserTableList: React.FC = () => {
   );
 };
 
-export default UserTableList;
+export default TutorTableList;

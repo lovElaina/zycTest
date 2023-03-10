@@ -1,6 +1,6 @@
 import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
-import type {TutorType, TutorListParams} from './data.d';
+import type {TutorType, TutorListParams} from './data';
 import {DataNode} from "antd/lib/tree";
 import {formatTreeSelectData} from "@/utils/utils";
 

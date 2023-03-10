@@ -14,6 +14,8 @@ public class SysAttend extends SysUser {
 
     private Long totalDay;
 
+    private Long actualDay;
+
     private Long attendDay;
 
     private Long leaveDay;
@@ -60,6 +62,14 @@ public class SysAttend extends SysUser {
 
     public void setTotalDay(Long totalDay) {
         this.totalDay = totalDay;
+    }
+
+    public Long getActualDay() {
+        return actualDay;
+    }
+
+    public void setActualDay(Long actualDay) {
+        this.actualDay = actualDay;
     }
 
     public Long getAttendDay() {
