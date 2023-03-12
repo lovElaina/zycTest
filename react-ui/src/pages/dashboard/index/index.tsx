@@ -6,13 +6,20 @@ import WrapContent from '@/components/WrapContent';
 import './tab.css'
 import {useRequest} from "@@/plugin-request/request";
 import {getNoticeList, queryCurrentUserInfo} from "@/pages/dashboard/index/service";
+import Workplace from "@/pages/dashboard/workplace";
 
 const Index: React.FC = () => {
   const intl = useIntl();
+  // const { data: userInfo, loading } = useRequest(() => {
+  //   return queryCurrentUserInfo();
+  // });
   const { data: userInfo, loading } = useRequest(() => {
     return queryCurrentUserInfo();
   });
-  const currentUser = userInfo?.user;
+  if(loading){
+    console.log("laodingeweeee")
+  }
+  const currentUser = userInfo;
   console.log(currentUser);
 
   // @ts-ignore
@@ -22,8 +29,8 @@ const Index: React.FC = () => {
   console.log(notice);
 
   return (
+    (currentUser?.user?.roles[0]?.roleId) == 1 ? (
     <WrapContent>
-
       <Card>
         <Alert
           message={intl.formatMessage({
@@ -40,7 +47,7 @@ const Index: React.FC = () => {
           }}
         />
         <Typography.Title level={2} style={{ textAlign: 'center' }}>
-          <SmileTwoTone /> 欢迎您！{!loading && (currentUser?.remark + " "+currentUser?.nickName)}
+          <SmileTwoTone /> 欢迎您！{!loading && (currentUser?.user?.remark + " "+currentUser?.user?.nickName)}
           {/*<HeartTwoTone twoToneColor="#eb2f96" /> You*/}
         </Typography.Title>
       </Card>
@@ -60,13 +67,6 @@ const Index: React.FC = () => {
         {/*</div>*/}
       </Carousel>
 
-      {/*<Card>*/}
-      {/*  */}
-      {/*  <Typography.Title level={2} style={{ textAlign: 'center' }}>*/}
-      {/*    <SmileTwoTone /> 欢迎您！{!loading && (currentUser?.remark + " "+currentUser?.nickName)}*/}
-      {/*    /!*<HeartTwoTone twoToneColor="#eb2f96" /> You*!/*/}
-      {/*  </Typography.Title>*/}
-      {/*</Card>*/}
       <Row gutter={24} style={{marginTop:24}}>
         <Col span={12}>
         <Card title="通知公告" headStyle={{fontSize:20}} bordered={false}>
@@ -89,8 +89,6 @@ const Index: React.FC = () => {
       </Row>
 
 
-
-
       <p style={{ textAlign: 'center', marginTop: 24 }}>
         Want to add more pages? Please refer to{' '}
         <a href="https://pro.ant.design/docs/block-cn" target="_blank" rel="noopener noreferrer">
@@ -98,7 +96,7 @@ const Index: React.FC = () => {
         </a>
         。
       </p>
-    </WrapContent>
+    </WrapContent>) : (currentUser?.user?.roles[0]?.roleId) == 4 ? <Workplace info={currentUser}/> : <div>loading...</div>
   );
 };
 

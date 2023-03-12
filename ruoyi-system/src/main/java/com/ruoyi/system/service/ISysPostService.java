@@ -11,6 +11,14 @@ import com.ruoyi.system.domain.SysPost;
 public interface ISysPostService
 {
     /**
+     * 根据用户ID查询岗位Id
+     *
+     * @param userId 用户Id
+     * @return 岗位Id
+     */
+    public Long selectUserPostIdByUserId(Long userId);
+
+    /**
      * 查询岗位信息集合
      * 
      * @param post 岗位信息

@@ -32,6 +32,71 @@
   },
 
   {
+    path: '/affairs',
+    name: 'affairs',
+    icon: 'affairs',
+    component: '@/layouts/TabsLayout',
+    routes: [
+      {
+        path: '/affairs',
+        redirect: '/affairs/index',
+      },
+      {
+        name: 'index',
+        icon: 'smile',
+        path: '/affairs/index',
+        component: './affairs/index',
+        wrappers: ['@/components/KeepAlive'],
+        KeepAlive: true,
+        title: '事务申请'
+      },
+    ]
+  },
+  {
+    path: '/clock',
+    name: 'clock',
+    icon: 'clock',
+    component: '@/layouts/TabsLayout',
+    routes: [
+      {
+        path: '/clock',
+        redirect: '/clock/index',
+      },
+      {
+        name: 'index',
+        icon: 'smile',
+        path: '/clock/index',
+        component: './clock/index',
+        wrappers: ['@/components/KeepAlive'],
+        KeepAlive: true,
+        title: '打卡签到'
+      },
+    ]
+  },
+
+  {
+    path: '/submit',
+    name: 'submit',
+    icon: 'submit',
+    component: '@/layouts/TabsLayout',
+    routes: [
+      {
+        path: '/submit',
+        redirect: '/submit/index',
+      },
+      {
+        name: 'index',
+        icon: 'smile',
+        path: '/submit/index',
+        component: './submit/index',
+        wrappers: ['@/components/KeepAlive'],
+        KeepAlive: true,
+        title: '报告提交'
+      },
+    ]
+  },
+
+  {
     path: '/dashboard',
     name: 'dashboard',
     icon: 'dashboard',
@@ -187,7 +252,7 @@
       {
         name: 'dictData',
         icon: 'PartitionOutlined',
-        path: '/system/dictData/index/:id?',
+        path: '/system/dict-data/index/:id?',
         component: 'system/dictData/index',
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],

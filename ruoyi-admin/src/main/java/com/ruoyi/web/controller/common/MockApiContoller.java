@@ -196,38 +196,38 @@ public class MockApiContoller {
         item.put("memberLink", "");
         info.add(item);
 
-        item = new JSONObject();
-        item.put("id", "xxx4");
-        item.put("logo", avatars[3]);
-        item.put("title", "Bootstrap");
-        item.put("description", "那时候我只会想自己想要什么，从不想自己拥有什么");
-        item.put("updatedAt", DateUtils.getTime());
-        item.put("member", "程序员日常");
-        item.put("href", "");
-        item.put("memberLink", "");
-        info.add(item);
-
-        item = new JSONObject();
-        item.put("id", "xxx5");
-        item.put("logo", avatars[4]);
-        item.put("title", "React");
-        item.put("description", "凛冬将至");
-        item.put("updatedAt", DateUtils.getTime());
-        item.put("member", "高逼格设计天团");
-        item.put("href", "");
-        item.put("memberLink", "");
-        info.add(item);
-
-        item = new JSONObject();
-        item.put("id", "xxx6");
-        item.put("logo", avatars[5]);
-        item.put("title", "Webpack");
-        item.put("description", "生命就像一盒巧克力，结果往往出人意料");
-        item.put("updatedAt", DateUtils.getTime());
-        item.put("member", "程序员日常");
-        item.put("href", "");
-        item.put("memberLink", "");
-        info.add(item);
+//        item = new JSONObject();
+//        item.put("id", "xxx4");
+//        item.put("logo", avatars[3]);
+//        item.put("title", "Bootstrap");
+//        item.put("description", "那时候我只会想自己想要什么，从不想自己拥有什么");
+//        item.put("updatedAt", DateUtils.getTime());
+//        item.put("member", "程序员日常");
+//        item.put("href", "");
+//        item.put("memberLink", "");
+//        info.add(item);
+//
+//        item = new JSONObject();
+//        item.put("id", "xxx5");
+//        item.put("logo", avatars[4]);
+//        item.put("title", "React");
+//        item.put("description", "凛冬将至");
+//        item.put("updatedAt", DateUtils.getTime());
+//        item.put("member", "高逼格设计天团");
+//        item.put("href", "");
+//        item.put("memberLink", "");
+//        info.add(item);
+//
+//        item = new JSONObject();
+//        item.put("id", "xxx6");
+//        item.put("logo", avatars[5]);
+//        item.put("title", "Webpack");
+//        item.put("description", "生命就像一盒巧克力，结果往往出人意料");
+//        item.put("updatedAt", DateUtils.getTime());
+//        item.put("member", "程序员日常");
+//        item.put("href", "");
+//        item.put("memberLink", "");
+//        info.add(item);
 
         AjaxResult ajax = AjaxResult.success();
         ajax.put("data", info);

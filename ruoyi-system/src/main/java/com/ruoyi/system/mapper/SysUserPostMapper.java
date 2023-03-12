@@ -10,6 +10,15 @@ import com.ruoyi.system.domain.SysUserPost;
  */
 public interface SysUserPostMapper
 {
+
+    /**
+     * 通过用户ID查询岗位ID
+     *
+     * @param userId 用户ID
+     * @return 结果
+     */
+    public Long selectUserPostIdByUserId(Long userId);
+
     /**
      * 通过用户ID删除用户和岗位关联
      * 

@@ -25,6 +25,11 @@ public class SysPostServiceImpl implements ISysPostService
     @Autowired
     private SysUserPostMapper userPostMapper;
 
+    @Override
+    public Long selectUserPostIdByUserId(Long userId) {
+        return userPostMapper.selectUserPostIdByUserId(userId);
+    }
+
     /**
      * 查询岗位信息集合
      * 
@@ -71,6 +76,18 @@ public class SysPostServiceImpl implements ISysPostService
     {
         return postMapper.selectPostListByUserId(userId);
     }
+
+//    /**
+//     * 根据用户ID获取岗位信息
+//     *
+//     * @param userId 用户ID
+//     * @return 岗位信息
+//     */
+//    @Override
+//    public List<Long> selectPostListByUserId(Long userId)
+//    {
+//        return postMapper.selectPostListByUserId(userId);
+//    }
 
     /**
      * 校验岗位名称是否唯一
