@@ -17,7 +17,7 @@ const Index: React.FC = () => {
     return queryCurrentUserInfo();
   });
   if(loading){
-    console.log("laodingeweeee")
+    console.log("currentUser")
   }
   const currentUser = userInfo;
   console.log(currentUser);

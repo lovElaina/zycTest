@@ -7,11 +7,13 @@ import java.util.List;
 
 public interface SysAttendMapper {
 
-    public List<SysAttend> selectAttendList(SysAttend sysAttend);
+    public List<SysAttend> selectAttendList();
 
     public boolean updateAttend(SysAttend sysAttend);
 
     public int insertAttend(SysAttend sysAttend);
 
     public int deleteAttendByUserId(Long userId);
+
+    public Long selectAttendIdByUserId(Long userId);
 }

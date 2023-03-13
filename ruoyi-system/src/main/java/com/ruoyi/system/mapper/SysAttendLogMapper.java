@@ -10,4 +10,6 @@ public interface SysAttendLogMapper {
 
     public boolean updateAttendLog(SysAttendLog sysAttendLog);
 
+    public int insertAttendLog(SysAttendLog sysAttendLog);
+
 }

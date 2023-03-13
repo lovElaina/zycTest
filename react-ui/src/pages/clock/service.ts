@@ -2,8 +2,12 @@ import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
 //import type { PostType, PostListParams } from './data.d';
 
+export async function queryCurrentUserInfo(): Promise<{ data: API.GetUserInfoResult }> {
+  return { data: await request('/getInfo') }
+}
 
-// 查询岗位信息列表
+
+// 查询出勤总表
 // @ts-ignore
 export async function getAttendList () {
   //const queryString = new URLSearchParams(params).toString();
@@ -16,22 +20,37 @@ export async function getAttendList () {
   });
 }
 
-// 查询岗位信息详细
 // @ts-ignore
-export function getPost (postId) {
-  return request(`/system/post/${postId}`, {
-    method: 'GET'
+export async function getAttendLogListByUserId(params,userId){
+  const queryString = new URLSearchParams(params).toString();
+  return request(`/system/attend/user/${userId}?${queryString}`,{
+    //data: params,
+    method: 'GET',
+      headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+    }
   });
 }
 
-// 新增岗位信息
+// 新增打卡记录
 // @ts-ignore
-export async function addPost (params) {
-  return request('/system/post', {
+export async function addLog (params) {
+  return request(`/system/attend/insert`, {
     method: 'POST',
     data: params
   });
 }
+
+
+
+
+
+
+
+
+
+
+
 
 // 修改岗位信息
 // @ts-ignore

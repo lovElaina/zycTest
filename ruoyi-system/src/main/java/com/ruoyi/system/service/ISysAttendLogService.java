@@ -8,4 +8,6 @@ public interface ISysAttendLogService {
     public List<SysAttendLog> selectAttendLogListByAttendId(Long attendId);
 
     public boolean updateAttendLog(SysAttendLog attendLog);
+
+    public int insertAttendLog(SysAttendLog attendLog);
 }

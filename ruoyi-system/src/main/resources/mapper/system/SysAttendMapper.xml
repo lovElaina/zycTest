@@ -55,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 
-    <select id="selectAttendList" parameterType="SysAttend" resultMap="SysAttendResult">
+    <select id="selectAttendList"  resultMap="SysAttendResult">
         select a.attend_id, a.user_id, a.total_day ,a.actual_day, a.attend_day, a.leave_day, a.absent_day, a.late_day, a.del_flag, a.create_by, a.create_time, a.update_by, a.update_time, a.remark, a.status,
         u.user_id, u.student_id, u.dept_id, u.user_name, u.nick_name, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.status, u.internship_status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, u.tutor_id, u.start_time, u.end_time
         from sys_attend a
@@ -67,8 +67,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!--        <if test="phonenumber != null and phonenumber != ''">-->
 <!--            AND u.phonenumber like concat('%', #{phonenumber}, '%')-->
 <!--        </if>-->
+
         <!-- 数据范围过滤 -->
-        ${params.dataScope}
+    </select>
+
+    <select id = "selectAttendIdByUserId" parameterType="Long" resultType="Long">
+        select attend_id from sys_attend where user_id = #{userId} AND del_flag = '0'
     </select>
 
 

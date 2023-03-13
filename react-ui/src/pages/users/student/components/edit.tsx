@@ -90,6 +90,12 @@ const UserForm: React.FC<UserFormProps> = (props) => {
     return true;
   };
 
+  // @ts-ignore
+  const disabledDate = (current) => {
+    // Can not select days before today and today
+    return current ;
+  };
+
   return (
     <Modal
       width={640}
@@ -354,6 +360,7 @@ const UserForm: React.FC<UserFormProps> = (props) => {
         <Row gutter={[16, 16]}>
           <Col span={24} order={1}>
             <ProFormDateRangePicker
+              fieldProps={{disabledDate:disabledDate}}
               width="md"
               name="dateRange"
               label="实习起止时间"

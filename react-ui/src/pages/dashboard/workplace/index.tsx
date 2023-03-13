@@ -178,11 +178,11 @@ const Workplace: FC = (info) => {
                   打卡签到
                 </Card.Grid>
 
-              <Card.Grid style={{background:"#dec3a7"}} className={styles.projectGrid} key="card1" hoverable onClick={handleClickTwo}>
+              <Card.Grid style={{background:"#dec3a7"}} className={styles.projectGrid} key="card2" hoverable onClick={handleClickTwo}>
                 提交报告
               </Card.Grid>
 
-              <Card.Grid style={{background:"#d3aad0"}} className={styles.projectGrid} key="card1" hoverable onClick={handleClickThree}>
+              <Card.Grid style={{background:"#d3aad0"}} className={styles.projectGrid} key="card3" hoverable onClick={handleClickThree}>
                 事务申请
               </Card.Grid>
 

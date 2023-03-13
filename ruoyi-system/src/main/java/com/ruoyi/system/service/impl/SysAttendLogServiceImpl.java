@@ -16,14 +16,17 @@ public class SysAttendLogServiceImpl implements ISysAttendLogService {
     private SysAttendLogMapper attendLogMapper;
 
     @Override
-    @DataScope(deptAlias = "d", userAlias = "u")
     public List<SysAttendLog> selectAttendLogListByAttendId(Long attendId) {
         return attendLogMapper.selectAttendLogListByAttendId(attendId);
     }
 
     @Override
-    @DataScope(deptAlias = "d", userAlias = "u")
     public boolean updateAttendLog(SysAttendLog attendLog) {
         return attendLogMapper.updateAttendLog(attendLog);
+    }
+
+    @Override
+    public int insertAttendLog(SysAttendLog attendLog) {
+        return attendLogMapper.insertAttendLog(attendLog);
     }
 }

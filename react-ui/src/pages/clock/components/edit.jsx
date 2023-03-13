@@ -158,40 +158,40 @@ const PostForm = (props) => {
             }
           )
       }}
-        toolbar={{
-        menu: {
-          type: 'tab',
-          activeKey: activeKey,
-          items: [
-            {
-              key: 'tab1',
-              label: <span>共计{renderBadge(9, activeKey === 'tab1')}</span>,
-            },
-          ],
-          onChange: (key) => {
-            setActiveKey(key);
-          },
-        },
-        actions: [
-          <Button key="primary" type="primary">
-            导出
-          </Button>,
-        ],
-      }}
+      //   toolbar={{
+      //   menu: {
+      //     type: 'tab',
+      //     activeKey: activeKey,
+      //     items: [
+      //       {
+      //         key: 'tab1',
+      //         label: <span>共计{renderBadge(9, activeKey === 'tab1')}</span>,
+      //       },
+      //     ],
+      //     onChange: (key) => {
+      //       setActiveKey(key);
+      //     },
+      //   },
+      //   actions: [
+      //     <Button key="primary" type="primary">
+      //       导出
+      //     </Button>,
+      //   ],
+      // }}
         rowKey="key"
         pagination={{
         showQuickJumper: true,
       }}
         search={false}
         dateFormatter="string"
-        options={{
-        setting: {
-          draggable: true,
-          checkable: true,
-          checkedReset: false,
-          extra: [<a key="confirm">确认</a>],
-        },
-      }}
+      //   options={{
+      //   setting: {
+      //     draggable: true,
+      //     checkable: true,
+      //     checkedReset: false,
+      //     extra: [<a key="confirm">确认</a>],
+      //   },
+      // }}
       />
 
 

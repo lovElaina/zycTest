@@ -22,7 +22,7 @@
     <select id="selectAttendLogListByAttendId" parameterType="Long" resultMap="SysAttendLogResult">
         select al.log_id, al.attend_id, al.attend_date, al.work_time, al.rest_time, al.result, al.create_by, al.create_time, al.update_by, al.update_time, al.remark
         from sys_attend_log al
-        where al.attend_id = #{attendId}
+        where al.attend_id = #{attendId} order by al.log_id desc
     </select>
 
 

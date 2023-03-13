@@ -60,6 +60,9 @@ public class SysApplyServiceImpl implements ISysApplyService {
         attend.setLateDay(0L);
         attend.setLeaveDay(0L);
         attend.setTotalDay(0L);
+//        if(apply.getStartTime()<System.currentTimeMillis()){
+//
+//        }
         //attend.setStatus(apply.getInternshipStatus());
         attendMapper.insertAttend(attend);
     }

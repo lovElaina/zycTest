@@ -21,8 +21,12 @@ public class SysAttendServiceImpl implements ISysAttendService {
 
 
     @Override
-    @DataScope(deptAlias = "d", userAlias = "u")
-    public List<SysAttend> selectAttendList(SysAttend attend) {
-        return attendMapper.selectAttendList(attend);
+    public List<SysAttend> selectAttendList() {
+        return attendMapper.selectAttendList();
+    }
+
+    @Override
+    public Long selectAttendIdByUserId(Long userId) {
+        return attendMapper.selectAttendIdByUserId(userId);
     }
 }
