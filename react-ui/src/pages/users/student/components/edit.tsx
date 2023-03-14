@@ -11,6 +11,7 @@ import { Form, Modal, Row, Col } from 'antd';
 import { useIntl, FormattedMessage } from 'umi';
 import type { UserType } from '../data';
 import type { DataNode } from 'antd/lib/tree';
+import dayjs from "dayjs";
 
 
 export type UserFormValueType = Record<string, unknown> & Partial<UserType>;
@@ -93,7 +94,7 @@ const UserForm: React.FC<UserFormProps> = (props) => {
   // @ts-ignore
   const disabledDate = (current) => {
     // Can not select days before today and today
-    return current ;
+    return current && current < dayjs().endOf('day');
   };
 
   return (

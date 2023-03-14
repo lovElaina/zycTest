@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class SysApplyServiceImpl implements ISysApplyService {
@@ -38,11 +39,14 @@ public class SysApplyServiceImpl implements ISysApplyService {
     @Override
     @Transactional
     public int updateApply(SysApply apply) {
-        if(apply.getStatus()==1L){
+        //前端进行了批准操作，且申请类型为”开始实习“
+        //默认无法当天开始，所以设为未实习
+        if(Objects.equals(apply.getApplyType(), "0") &&apply.getStatus()==1L){
             SysUser user = userMapper.selectUserById(apply.getUserId());
-            user.setInternshipStatus("1");
+            user.setInternshipStatus("0");
             user.setStartTime(apply.getStartTime().toString());
             user.setEndTime(apply.getEndTime().toString());
+            //这里自动添加了attend
             userMapper.updateUser(user);
 
             attendMapper.deleteAttendByUserId(apply.getUserId());
@@ -60,10 +64,7 @@ public class SysApplyServiceImpl implements ISysApplyService {
         attend.setLateDay(0L);
         attend.setLeaveDay(0L);
         attend.setTotalDay(0L);
-//        if(apply.getStartTime()<System.currentTimeMillis()){
-//
-//        }
-        //attend.setStatus(apply.getInternshipStatus());
+        attend.setStatus("0"); //未开始
         attendMapper.insertAttend(attend);
     }
 

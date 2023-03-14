@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 
+import com.ruoyi.system.domain.SysAttend;
 import com.ruoyi.system.service.ISysAttendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -78,6 +79,7 @@ public class SysLoginController
         SysPost sysPost = postService.selectPostById(postId);
         System.out.println(sysPost);
         Long attendId = attendService.selectAttendIdByUserId(user.getUserId());
+
         AjaxResult ajax = AjaxResult.success();
         ajax.put("user", user);
         ajax.put("roles", roles);

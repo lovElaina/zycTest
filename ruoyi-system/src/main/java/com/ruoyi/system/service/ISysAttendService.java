@@ -15,5 +15,7 @@ public interface ISysAttendService {
 
     public Long selectAttendIdByUserId(Long userId);
 
+    public boolean updateAttend(SysAttend sysAttend);
 
+    public SysAttend selectAttendByAttendId(Long attendId);
 }

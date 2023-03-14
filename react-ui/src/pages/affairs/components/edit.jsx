@@ -1,207 +1,166 @@
-import React, { useState,useEffect } from 'react';
-import { ProFormDigit, ProFormText, ProFormRadio, ProFormTextArea } from '@ant-design/pro-form';
-import {Form, Modal, Row, Col, Badge, Button, Tag} from 'antd';
-import {ProTable} from '@ant-design/pro-components'
+import React, {useEffect, useState} from 'react';
+import {
+  ProFormDigit,
+  ProFormText,
+  ProFormTextArea,
+  ProFormSelect,
+  ProFormTreeSelect, ProForm, ProFormDependency
+} from '@ant-design/pro-form';
+import { Form, Modal, Row, Col } from 'antd';
+import { useIntl, FormattedMessage } from 'umi';
+import {ProFormDateRangePicker} from "@ant-design/pro-components";
+import dayjs from "dayjs";
 
 
-const PostForm = (props) => {
+const ApplyForm = (props) => {
   const [form] = Form.useForm();
-  const [activeKey, setActiveKey] = useState('tab1');
+
+  const formRef = React.useRef();
+
+  const [userId, setUserId] = useState('');
+
+  //const { depts } = props;
+  //const { sexOptions, statusOptions, internshipStatusOptions } = props;
 
   // useEffect(() => {
   //   form.resetFields();
-  //   form.setFieldsValue({
-  //     postId: props.values.postId,
-  //     //postCode: props.values.postCode,
-  //     postName: props.values.postName,
-  //     companyName: props.values.companyName,
-  //     depName: props.values.depName,
-  //     status: props.values.status,
-  //     createBy: props.values.createBy,
-  //     createTime: props.values.createTime,
-  //     updateBy: props.values.updateBy,
-  //     updateTime: props.values.updateTime,
-  //     remark: props.values.remark,
-  //     salary: props.values.salary,
-  //     workTime: props.values.workTime,
-  //     requirement:props.values.requirement,
-  //     phonenumber:props.values.phonenumber,
-  //   });
+  //   //setUserId(props.values.userId);
   // }, [form, props]);
 
 
+  const intl = useIntl();
   const handleOk = () => {
     form.submit();
   };
   const handleCancel = () => {
-    props.onCancel();
+    //props.onCancel();
     form.resetFields();
   };
-  const handleFinish = (values) => {
-    props.onSubmit(values);
+  const handleFinish = async (values) => {
+    console.log(values)
+    return true;
   };
 
 
-
-
-  const valueEnum = {
-    0: 'close',
-    1: 'running',
-    2: 'online',
-    3: 'error',
+  const disabledDate = (current) => {
+    // Can not select days before today and today
+    return current && current < dayjs().endOf('day');
   };
-
-  const tableListDataSource = [];
-
-  //const creators = ['付小小', '曲丽丽', '林东东', '陈帅帅', '兼某某'];
-  const times = ['2023-01-09','2023-01-06','2023-01-06','2023-01-05','2023-01-04','2023-01-03','2023-01-02','2023-01-02','2022-12-30']
-  const type = ['日报','周报','日报','日报','日报','日报','月报','日报','日报']
-  const title = ['1月9号实习总结','第一周实习总结','1月6号实习总结','1月5号实习总结','1月4号实习总结','1月3号实习总结','12月实习总结','1月2号实习总结','12月30号实习总结']
-  const status = ['未批阅','未批阅','未批阅','已批阅','已批阅','已批阅','已批阅','已批阅','已批阅']
-  const score = ['-','-','-','92','83','95','84','89','91']
-  for (let i = 0; i < 9; i += 1) {
-    tableListDataSource.push({
-      key: i,
-      time: times[i],
-      type:type[i],
-      title:title[i],
-      status:status[i],
-      score:score[i]
-      //containers: Math.floor(Math.random() * 20),
-      //status: status[i],
-      //createdAt: Date.now() - Math.floor(Math.random() * 2000),
-
-    });
-  }
-
-  const columns = [
-    {
-      title: '日期',
-      dataIndex: 'time',
-      valueType: 'text',
-      width: "250px"
-    },
-    {
-      title: '类型',
-      dataIndex: 'type',
-      valueType: 'text',
-    },
-    {
-      title: '标题',
-      dataIndex: 'title',
-      render: (_) => <a>{_}</a>,
-    },
-    {
-      title: '状态',
-      dataIndex: 'status',
-      render:(_) => _ ==="未批阅" ? <Tag color="red" style={{fontSize:'14px'}}>{_}</Tag> : <Tag color="green" style={{fontSize:'14px'}}>{_}</Tag>
-    },
-    {
-      title: '成绩',
-      dataIndex: 'score',
-      valueType: 'text',
-    },
-
-    {
-      title: '操作',
-      key: 'option',
-      width: 120,
-      valueType: 'option',
-      render: (_, record) => [
-        record.status==="未批阅"? <a key="link">批阅</a> : <a key="link">重新批阅</a>
-      ],
-    },
-  ];
-
-  const renderBadge = (count, active = false) => {
-    return (
-      <Badge
-        count={count}
-        style={{
-          marginBlockStart: -2,
-          marginInlineStart: 4,
-          color: active ? '#722ED1' : '#999',
-          backgroundColor: active ? '#f0e6ff' : '#eee',
-        }}
-      />
-    );
-  };
-
-  let sleep = (delaytime = 300) => {
-    return new Promise(function (resolve){
-      setTimeout(resolve,delaytime)
-    })
-  }
 
   return (
-    <Modal
-      width="60%"
-      title="实习报告提交记录"
-      visible={props.visible}
-      destroyOnClose
-      onOk={handleOk}
-      onCancel={handleCancel}
-    >
+      <ProForm formRef={formRef}  form={form} onFinish={async (values) =>{
+        console.log(values)
+      }} >
 
 
+            <ProFormSelect
+              name="applyType"
+              mode="single"
+              options={[
+                {
+                  value: 0,
+                  label: '申请实习',
+                },
+                {
+                  value: 1,
+                  label: '更换岗位',
+                },
+                {
+                  value: 2,
+                  label: '终止实习',
+                },
+                {
+                  value: 3,
+                  label: '请假',
+                },
+                {
+                  value: 4,
+                  label: '延迟实习时间',
+                }
+              ]}
 
-      <ProTable
-        columns={columns}
-        request={(params, sorter, filter) => {
-        // 表单搜索项会从 params 传入，传递给后端接口。
-        console.log(params, sorter, filter);
-          return sleep().then(()=>{
-              return Promise.resolve({
-                data: tableListDataSource,
-                success: true,
-              });
+              width="xl"
+              label="申请类型"
+              placeholder="请选择申请类型"
+              rules={[{ required: true, message: '请选择类型' }]}
+            />
+
+            <ProFormDependency name={['applyType']}>
+              {({applyType})=>{
+                if(applyType === 0 || applyType === 3 || applyType === 4){
+                  return (
+                    <ProFormDateRangePicker
+                      fieldProps={{disabledDate:disabledDate}}
+                      width="md"
+                      name="dateRange"
+                      label="起止时间"
+                    />
+                  )
+                }
+              }}
+
+            </ProFormDependency>
+
+
+        <ProFormDependency name={['applyType']}>
+          {({applyType})=>{
+            if(applyType === 0 || applyType === 1){
+              return (
+                <ProFormSelect
+                  name="job"
+                  mode="single"
+                  options={[
+                    {
+                      value: 0,
+                      label: '百度',
+                    },
+                    {
+                      value: 1,
+                      label: '京东',
+                    },
+                    {
+                      value: 2,
+                      label: '阿里',
+                    },
+                    {
+                      value: 3,
+                      label: '美团',
+                    },
+                    {
+                      value: 4,
+                      label: '其他',
+                    }
+                  ]}
+                  width="xl"
+                  label="实习岗位"
+                  placeholder="请选择实习岗位"
+                  rules={[{ required: true, message: '请选择类型' }]}
+                />
+              )
             }
-          )
-      }}
-        toolbar={{
-        menu: {
-          type: 'tab',
-          activeKey: activeKey,
-          items: [
-            {
-              key: 'tab1',
-              label: <span>共计{renderBadge(9, activeKey === 'tab1')}</span>,
-            },
-          ],
-          onChange: (key) => {
-            setActiveKey(key);
-          },
-        },
-        actions: [
-          <Button key="primary" type="primary">
-            导出
-          </Button>,
-        ],
-      }}
-        rowKey="key"
-        pagination={{
-        showQuickJumper: true,
-      }}
-        search={false}
-        dateFormatter="string"
-        options={{
-        setting: {
-          draggable: true,
-          checkable: true,
-          checkedReset: false,
-          extra: [<a key="confirm">确认</a>],
-        },
-      }}
-      />
+          }}
+        </ProFormDependency>
 
 
 
 
 
 
+            <ProFormTextArea
+              name="applyDetail"
+              label="详情"
+              width="xl"
+              placeholder="请输入详细情况"
+              rules={[
+                {
+                  required: false,
+                  message: "请输入详细情况！",
+                },
+              ]}
+            />
 
-    </Modal>
+      </ProForm>
   );
 };
 
-export default PostForm;
+export default ApplyForm;

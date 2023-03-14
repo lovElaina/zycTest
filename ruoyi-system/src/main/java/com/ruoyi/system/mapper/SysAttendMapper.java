@@ -16,4 +16,6 @@ public interface SysAttendMapper {
     public int deleteAttendByUserId(Long userId);
 
     public Long selectAttendIdByUserId(Long userId);
+
+    public SysAttend selectAttendByAttendId(Long attendId);
 }

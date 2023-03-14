@@ -41,6 +41,15 @@ export async function addLog (params) {
   });
 }
 
+// 下班打卡记录
+// @ts-ignore
+export async function updateLog (params) {
+  return request(`/system/attend/update`, {
+    method: 'PUT',
+    data: params
+  });
+}
+
 
 
 

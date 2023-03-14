@@ -29,4 +29,16 @@ public class SysAttendServiceImpl implements ISysAttendService {
     public Long selectAttendIdByUserId(Long userId) {
         return attendMapper.selectAttendIdByUserId(userId);
     }
+
+    @Override
+    public boolean updateAttend(SysAttend sysAttend) {
+        return attendMapper.updateAttend(sysAttend);
+    }
+
+    @Override
+    public SysAttend selectAttendByAttendId(Long attendId) {
+        return attendMapper.selectAttendByAttendId(attendId);
+    }
+
+
 }

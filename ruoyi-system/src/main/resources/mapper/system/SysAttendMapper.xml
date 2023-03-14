@@ -54,6 +54,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
 
+    <select id="selectAttendByAttendId" resultMap="SysAttendResult">
+        select a.attend_id, a.user_id, a.total_day ,a.actual_day, a.attend_day, a.leave_day, a.absent_day, a.late_day, a.del_flag, a.create_by, a.create_time, a.update_by, a.update_time, a.remark, a.status
+        from sys_attend a
+        where a.del_flag = '0' AND a.attend_id = #{attendId}
+    </select>
 
     <select id="selectAttendList"  resultMap="SysAttendResult">
         select a.attend_id, a.user_id, a.total_day ,a.actual_day, a.attend_day, a.leave_day, a.absent_day, a.late_day, a.del_flag, a.create_by, a.create_time, a.update_by, a.update_time, a.remark, a.status,

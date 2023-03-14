@@ -83,7 +83,6 @@ public class SysUserServiceImpl implements ISysUserService {
      * @return 用户信息集合信息
      */
     @Override
-    @DataScope(deptAlias = "d", userAlias = "u")
     public List<SysUser> selectStudentList(SysUser user) {
         return userMapper.selectStudentList(user);
     }
@@ -306,6 +305,7 @@ public class SysUserServiceImpl implements ISysUserService {
         insertUserPost(user);
         System.out.println(user.getInternshipStatus() + "sssss");
 
+        //可以认为只改变了实习时间及其他无关紧要的东西
         if (Objects.equals(userMapper.selectUserById(userId).getInternshipStatus(), "1") &&
                 Objects.equals(user.getInternshipStatus(), "1")) {
             updateAttendItem(user);

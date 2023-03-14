@@ -3,12 +3,11 @@ import request from '@/utils/request';
 //import type { PostType, PostListParams } from './data.d';
 
 
-// 查询岗位信息列表
+// 查询申请信息列表
 // @ts-ignore
-export async function getAttendList () {
-  //const queryString = new URLSearchParams(params).toString();
-  return request(`/system/attend/list`, {
-    //data: params,
+export async function getApplyList (params) {
+  const queryString = new URLSearchParams(params).toString();
+  return request(`/internship/apply/list?${queryString}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -16,36 +15,19 @@ export async function getAttendList () {
   });
 }
 
-// 查询岗位信息详细
-// @ts-ignore
-export function getPost (postId) {
-  return request(`/system/post/${postId}`, {
-    method: 'GET'
-  });
-}
-
-// 新增岗位信息
-// @ts-ignore
-export async function addPost (params) {
-  return request('/system/post', {
-    method: 'POST',
-    data: params
-  });
-}
-
-// 修改岗位信息
+// 修改申请信息
 // @ts-ignore
 export async function updatePost (params) {
-  return request('/system/post', {
+  return request('/internship/apply', {
     method: 'PUT',
     data: params
   });
 }
 
-// 删除岗位信息
+// 删除删除信息
 // @ts-ignore
 export async function removePost (ids) {
-  return request(`/system/post/${ids}`, {
+  return request(`/internship/apply/${ids}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
