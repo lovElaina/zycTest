@@ -306,6 +306,8 @@ public class SysUserServiceImpl implements ISysUserService {
         System.out.println(user.getInternshipStatus() + "sssss");
 
         //可以认为只改变了实习时间及其他无关紧要的东西
+
+        //该学生记录更新，但实习状态一直为实习中，未发生改变，此时仅更新
         if (Objects.equals(userMapper.selectUserById(userId).getInternshipStatus(), "1") &&
                 Objects.equals(user.getInternshipStatus(), "1")) {
             updateAttendItem(user);
@@ -315,7 +317,6 @@ public class SysUserServiceImpl implements ISysUserService {
         } else if (!Objects.equals(userMapper.selectUserById(userId).getInternshipStatus(), "1") &&
                 Objects.equals(user.getInternshipStatus(), "1")) {
             attendMapper.deleteAttendByUserId(userId);
-            System.out.println("////////////////////////////////////////////////////////////////////////////////");
             insertAttendItem(user);
         }
 

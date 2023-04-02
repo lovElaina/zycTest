@@ -27,20 +27,25 @@ public class AttendTask {
     @Autowired
     private ISysUserService userService;
 
-
+    //定时任务，自动进行缺勤记录
     public void absenceRecord(){
-        System.out.println("----------------------------------------------");
+        System.out.println("--------------定时任务执行-缺勤记录----------------------");
+        //获取出勤表List
         List<SysAttend> list = attendService.selectAttendList();
         for (SysAttend sysAttend : list) {
-            //当出勤表的状态不为正常时，不对该条目进行记录。
+            //当出勤表状态不正常时，不对该条目进行记录。
             if(!Objects.equals(sysAttend.getStatus(), "1"))continue;
+            //通过出勤表Id，获取对应的出勤记录列表
             List<SysAttendLog> logList = attendLogService.selectAttendLogListByAttendId(sysAttend.getAttendId());
             int i = 0;
+
             for(;i<logList.size();i++){
+                //检查是否存在当天的出勤记录，如果存在，则退出循环，判断下一个学生。
                 if(conversionTime(logList.get(i).getAttendDate().toString()).equals(conversionTime(String.valueOf(System.currentTimeMillis())))){
                     break;
                 }
             }
+            //执行到此处，如果i等于列表长度，说明不存在当天的出勤记录，系统添加缺勤记录
             if(i == logList.size()){
                 SysAttendLog newAttendLog = new SysAttendLog();
                 newAttendLog.setAttendId(sysAttend.getAttendId());
@@ -77,12 +82,12 @@ public class AttendTask {
     public void changeInternshipStatus(){
         List<SysUser> list = userService.selectStudentList(new SysUser());
         for (SysUser sysUser : list) {
-
+            //判断这名学生是否有当天开始的实习计划，如果有，改变实习状态为实习中
             if(conversionTime(sysUser.getStartTime()).equals(conversionTime(String.valueOf(System.currentTimeMillis())))){
                 sysUser.setInternshipStatus("1");
                 userService.updateUser(sysUser);
             }
-
+            //判断这名学生实习计划中的结束日期是否在一天前，如果有，改变实习状态为已完成
             if(ifDiffOneDay(sysUser.getEndTime(),System.currentTimeMillis()+"")){
                 sysUser.setInternshipStatus("2");
                 userService.updateUser(sysUser);

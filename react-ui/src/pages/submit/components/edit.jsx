@@ -8,26 +8,6 @@ const PostForm = (props) => {
   const [form] = Form.useForm();
   const [activeKey, setActiveKey] = useState('tab1');
 
-  // useEffect(() => {
-  //   form.resetFields();
-  //   form.setFieldsValue({
-  //     postId: props.values.postId,
-  //     //postCode: props.values.postCode,
-  //     postName: props.values.postName,
-  //     companyName: props.values.companyName,
-  //     depName: props.values.depName,
-  //     status: props.values.status,
-  //     createBy: props.values.createBy,
-  //     createTime: props.values.createTime,
-  //     updateBy: props.values.updateBy,
-  //     updateTime: props.values.updateTime,
-  //     remark: props.values.remark,
-  //     salary: props.values.salary,
-  //     workTime: props.values.workTime,
-  //     requirement:props.values.requirement,
-  //     phonenumber:props.values.phonenumber,
-  //   });
-  // }, [form, props]);
 
 
   const handleOk = () => {
@@ -134,14 +114,7 @@ const PostForm = (props) => {
   }
 
   return (
-    <Modal
-      width="60%"
-      title="实习报告提交记录"
-      visible={props.visible}
-      destroyOnClose
-      onOk={handleOk}
-      onCancel={handleCancel}
-    >
+
 
 
 
@@ -158,26 +131,7 @@ const PostForm = (props) => {
             }
           )
       }}
-        toolbar={{
-        menu: {
-          type: 'tab',
-          activeKey: activeKey,
-          items: [
-            {
-              key: 'tab1',
-              label: <span>共计{renderBadge(9, activeKey === 'tab1')}</span>,
-            },
-          ],
-          onChange: (key) => {
-            setActiveKey(key);
-          },
-        },
-        actions: [
-          <Button key="primary" type="primary">
-            导出
-          </Button>,
-        ],
-      }}
+
         rowKey="key"
         pagination={{
         showQuickJumper: true,
@@ -194,13 +148,6 @@ const PostForm = (props) => {
       }}
       />
 
-
-
-
-
-
-
-    </Modal>
   );
 };
 

@@ -249,10 +249,10 @@ const getActivities = (_: Request, res: Response) => {
           link: 'http://github.com/',
         },
         project: {
-          name: '六月迭代',
+          name: '待办事项一',
           link: 'http://github.com/',
         },
-        template: '在 @{group} 新建项目 @{project}',
+        template: '',
       },
       {
         id: 'trend-2',
@@ -266,10 +266,10 @@ const getActivities = (_: Request, res: Response) => {
           link: 'http://github.com/',
         },
         project: {
-          name: '六月迭代',
+          name: '待办事项二',
           link: 'http://github.com/',
         },
-        template: '在 @{group} 新建项目 @{project}',
+        template: '',
       },
       {
         id: 'trend-3',
@@ -283,10 +283,10 @@ const getActivities = (_: Request, res: Response) => {
           link: 'http://github.com/',
         },
         project: {
-          name: '六月迭代',
+          name: '待办事项三',
           link: 'http://github.com/',
         },
-        template: '在 @{group} 新建项目 @{project}',
+        template: '',
       },
       {
         id: 'trend-4',

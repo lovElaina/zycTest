@@ -310,138 +310,139 @@ const PostTableList = () => {
   return (
     <WrapContent>
       <div style={{ width: '100%', float: 'right' }}>
-        <ProTable
-          headerTitle="报告管理"
-          actionRef={actionRef}
-          formRef={formTableRef}
-          rowKey="postId"
-          key="postList"
-          search={{
-            labelWidth: 120,
-          }}
-          toolBarRender={() => [
-            <Button
-              type="primary"
-              key="add"
-              hidden={!access.hasPerms('system:post:add')}
-              onClick={async () => {
-                setCurrentRow(undefined);
-                setModalVisible(true);
-              }}
-            >
-              <PlusOutlined /> 新建
-            </Button>,
-            <Button
-              type="primary"
-              key="remove"
-              hidden={selectedRowsState?.length === 0 || !access.hasPerms('system:post:remove')}
-              onClick={async () => {
-                const success = await handleRemove(selectedRowsState);
-                if (success) {
-                  setSelectedRows([]);
-                  actionRef.current?.reloadAndRest?.();
-                }
-              }}
-            >
-              <DeleteOutlined />
-              删除
-            </Button>,
-            <Button
-              type="primary"
-              key="export"
-              hidden={!access.hasPerms('system:post:export')}
-              onClick={async () => {
-                handleExport();
-              }}
-            >
-              <PlusOutlined />
-              导出
-            </Button>,
-          ]}
-          request={(params) =>{
-            return sleep().then(()=>{
-              return Promise.resolve({
-                data: tableListDataSource,
-                success: true,
-              });
-            })
-          }
+      {/*  <ProTable*/}
+      {/*    headerTitle="报告管理"*/}
+      {/*    actionRef={actionRef}*/}
+      {/*    formRef={formTableRef}*/}
+      {/*    rowKey="postId"*/}
+      {/*    key="postList"*/}
+      {/*    search={{*/}
+      {/*      labelWidth: 120,*/}
+      {/*    }}*/}
+      {/*    toolBarRender={() => [*/}
+      {/*      <Button*/}
+      {/*        type="primary"*/}
+      {/*        key="add"*/}
+      {/*        hidden={!access.hasPerms('system:post:add')}*/}
+      {/*        onClick={async () => {*/}
+      {/*          setCurrentRow(undefined);*/}
+      {/*          setModalVisible(true);*/}
+      {/*        }}*/}
+      {/*      >*/}
+      {/*        <PlusOutlined /> 新建*/}
+      {/*      </Button>,*/}
+      {/*      <Button*/}
+      {/*        type="primary"*/}
+      {/*        key="remove"*/}
+      {/*        hidden={selectedRowsState?.length === 0 || !access.hasPerms('system:post:remove')}*/}
+      {/*        onClick={async () => {*/}
+      {/*          const success = await handleRemove(selectedRowsState);*/}
+      {/*          if (success) {*/}
+      {/*            setSelectedRows([]);*/}
+      {/*            actionRef.current?.reloadAndRest?.();*/}
+      {/*          }*/}
+      {/*        }}*/}
+      {/*      >*/}
+      {/*        <DeleteOutlined />*/}
+      {/*        删除*/}
+      {/*      </Button>,*/}
+      {/*      <Button*/}
+      {/*        type="primary"*/}
+      {/*        key="export"*/}
+      {/*        hidden={!access.hasPerms('system:post:export')}*/}
+      {/*        onClick={async () => {*/}
+      {/*          handleExport();*/}
+      {/*        }}*/}
+      {/*      >*/}
+      {/*        <PlusOutlined />*/}
+      {/*        导出*/}
+      {/*      </Button>,*/}
+      {/*    ]}*/}
+      {/*    request={(params) =>{*/}
+      {/*      return sleep().then(()=>{*/}
+      {/*        return Promise.resolve({*/}
+      {/*          data: tableListDataSource,*/}
+      {/*          success: true,*/}
+      {/*        });*/}
+      {/*      })*/}
+      {/*    }*/}
 
-            // getAttendList().then((res) => {
-            //   return {
-            //     data: res.rows,
-            //     total: res.total,
-            //     success: true,
-            //   };
-            // })
-          }
-          columns={columns}
-          rowSelection={{
-            onChange: (_, selectedRows) => {
-              setSelectedRows(selectedRows);
-            },
-          }}
-        />
+      {/*      // getAttendList().then((res) => {*/}
+      {/*      //   return {*/}
+      {/*      //     data: res.rows,*/}
+      {/*      //     total: res.total,*/}
+      {/*      //     success: true,*/}
+      {/*      //   };*/}
+      {/*      // })*/}
+      {/*    }*/}
+      {/*    columns={columns}*/}
+      {/*    rowSelection={{*/}
+      {/*      onChange: (_, selectedRows) => {*/}
+      {/*        setSelectedRows(selectedRows);*/}
+      {/*      },*/}
+      {/*    }}*/}
+      {/*  />*/}
+      {/*</div>*/}
+      {/*{selectedRowsState?.length > 0 && (*/}
+      {/*  <FooterToolbar*/}
+      {/*    extra={*/}
+      {/*      <div>*/}
+      {/*        <FormattedMessage id="pages.searchTable.chosen" defaultMessage="已选择" />*/}
+      {/*        <a style={{ fontWeight: 600 }}>{selectedRowsState.length}</a>*/}
+      {/*        <FormattedMessage id="pages.searchTable.item" defaultMessage="项" />*/}
+      {/*      </div>*/}
+      {/*    }*/}
+      {/*  >*/}
+      {/*    <Button*/}
+      {/*      key="remove"*/}
+      {/*      hidden={!access.hasPerms('system:post:remove')}*/}
+      {/*      onClick={async () => {*/}
+      {/*        Modal.confirm({*/}
+      {/*          title: '删除',*/}
+      {/*          content: '确定删除该项吗？',*/}
+      {/*          okText: '确认',*/}
+      {/*          cancelText: '取消',*/}
+      {/*          onOk: async () => {*/}
+      {/*            const success = await handleRemove(selectedRowsState);*/}
+      {/*            if (success) {*/}
+      {/*              setSelectedRows([]);*/}
+      {/*              actionRef.current?.reloadAndRest?.();*/}
+      {/*            }*/}
+      {/*          },*/}
+      {/*        });*/}
+      {/*      }}*/}
+      {/*    >*/}
+      {/*      <FormattedMessage id="pages.searchTable.batchDeletion" defaultMessage="批量删除" />*/}
+      {/*    </Button>*/}
+      {/*  </FooterToolbar>*/}
+      {/*)}*/}
+      {/*<UpdateForm*/}
+      {/*  onSubmit={async (values) => {*/}
+      {/*    let success = false;*/}
+      {/*    if (values.postId) {*/}
+      {/*      success = await handleUpdate(values);*/}
+      {/*    } else {*/}
+      {/*      success = await handleAdd(values);*/}
+      {/*    }*/}
+      {/*    if (success) {*/}
+      {/*      setModalVisible(false);*/}
+      {/*      setCurrentRow(undefined);*/}
+      {/*      if (actionRef.current) {*/}
+      {/*        actionRef.current.reload();*/}
+      {/*      }*/}
+      {/*    }*/}
+      {/*  }}*/}
+      {/*  onCancel={() => {*/}
+      {/*    setModalVisible(false);*/}
+      {/*    setCurrentRow(undefined);*/}
+      {/*  }}*/}
+      {/*  visible={modalVisible}*/}
+      {/*  //////////////////注意这一行////////////////////////////////////////////////*/}
+      {/*  values={currentRow || {}}*/}
+      {/*  statusOptions={statusOptions}*/}
+
+      {/*/>*/}
       </div>
-      {selectedRowsState?.length > 0 && (
-        <FooterToolbar
-          extra={
-            <div>
-              <FormattedMessage id="pages.searchTable.chosen" defaultMessage="已选择" />
-              <a style={{ fontWeight: 600 }}>{selectedRowsState.length}</a>
-              <FormattedMessage id="pages.searchTable.item" defaultMessage="项" />
-            </div>
-          }
-        >
-          <Button
-            key="remove"
-            hidden={!access.hasPerms('system:post:remove')}
-            onClick={async () => {
-              Modal.confirm({
-                title: '删除',
-                content: '确定删除该项吗？',
-                okText: '确认',
-                cancelText: '取消',
-                onOk: async () => {
-                  const success = await handleRemove(selectedRowsState);
-                  if (success) {
-                    setSelectedRows([]);
-                    actionRef.current?.reloadAndRest?.();
-                  }
-                },
-              });
-            }}
-          >
-            <FormattedMessage id="pages.searchTable.batchDeletion" defaultMessage="批量删除" />
-          </Button>
-        </FooterToolbar>
-      )}
-      <UpdateForm
-        onSubmit={async (values) => {
-          let success = false;
-          if (values.postId) {
-            success = await handleUpdate(values);
-          } else {
-            success = await handleAdd(values);
-          }
-          if (success) {
-            setModalVisible(false);
-            setCurrentRow(undefined);
-            if (actionRef.current) {
-              actionRef.current.reload();
-            }
-          }
-        }}
-        onCancel={() => {
-          setModalVisible(false);
-          setCurrentRow(undefined);
-        }}
-        visible={modalVisible}
-        //////////////////注意这一行////////////////////////////////////////////////
-        values={currentRow || {}}
-        statusOptions={statusOptions}
-
-      />
 
 
 
