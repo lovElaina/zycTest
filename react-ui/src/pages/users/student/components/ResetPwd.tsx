@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { ProFormText } from '@ant-design/pro-form';
 import { Form, Modal } from 'antd';
 import { useIntl, FormattedMessage } from 'umi';
-import type { DeptType } from '../../../internship/dept/data';
+import type { DeptType } from '../../dept/data';
 
 
 export type FormValueType = any & Partial<DeptType>;

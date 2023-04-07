@@ -91,6 +91,7 @@ const PostForm = (props) => {
       title: '上班时间',
       dataIndex: 'workTime',
       render:(_)=>{
+        if (_ === "-") return "-- : -- : --"
         let d = new Date(_-0);
         return (d.getHours()<10? "0" + d.getHours() : d.getHours()) + " : " + (d.getMinutes()<10? "0" + d.getMinutes() : d.getMinutes()) + " : " + (d.getSeconds()<10? "0" + d.getSeconds():d.getSeconds())
       }
@@ -99,6 +100,7 @@ const PostForm = (props) => {
       title: '下班时间',
       dataIndex: 'restTime',
       render:(_)=>{
+        if (_ === "-") return "-- : -- : --"
         let d = new Date(_-0);
         return (d.getHours()<10? "0" + d.getHours() : d.getHours()) + " : " + (d.getMinutes()<10? "0" + d.getMinutes() : d.getMinutes()) + " : " + (d.getSeconds()<10? "0" + d.getSeconds():d.getSeconds())
       }

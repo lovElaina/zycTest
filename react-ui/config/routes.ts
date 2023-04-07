@@ -478,6 +478,16 @@
         KeepAlive: true,
         title: '企业管理'
       },
+      {
+        name: 'dept',
+        icon: 'PartitionOutlined',
+        path: '/users/dept',
+        component: 'users/dept/index',
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        KeepAlive: true,
+        title: 'menu.title.dept'
+      },
     ]
   },
 
@@ -514,16 +524,16 @@
       //   KeepAlive: true,
       //   title: 'menu.title.user'
       // },
-      {
-        name: 'dept',
-        icon: 'PartitionOutlined',
-        path: '/internship/dept',
-        component: 'internship/dept/index',
-        access: 'authorize',
-        wrappers: ['@/components/KeepAlive'],
-        KeepAlive: true,
-        title: 'menu.title.dept'
-      },
+      // {
+      //   name: 'dept',
+      //   icon: 'PartitionOutlined',
+      //   path: '/internship/dept',
+      //   component: 'internship/dept/index',
+      //   access: 'authorize',
+      //   wrappers: ['@/components/KeepAlive'],
+      //   KeepAlive: true,
+      //   title: 'menu.title.dept'
+      // },
       {
         name: 'attendance',
         icon: 'PartitionOutlined',
